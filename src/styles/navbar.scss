@@ -1,0 +1,34 @@
+@import "./config";
+
+$size: 25px;
+
+.navbar-content {
+  @include flex(column);
+
+  section {
+    margin: 20px auto;
+  }
+
+  svg {
+    cursor: pointer;
+    width: $size;
+    height: $size;
+  }
+
+  #user {
+    position: absolute;
+    bottom: 0;
+    margin: calc(#{$navbar-width} / 2 - #{$size} / 2);
+
+    @media (max-width: $breakpoint) {
+      position: relative;
+      bottom: auto;
+      margin: 20px auto;
+    }
+  }
+
+  @media (max-width: $breakpoint) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

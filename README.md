@@ -1,2 +1,3 @@
-# anilist-client
-An anilist client using React
+# Kensaku
+
+Unofficial Anilist client

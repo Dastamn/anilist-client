@@ -1,0 +1,45 @@
+@import "./config";
+
+.status-container {
+  background-color: $lighter-bg-color;
+  border-radius: 5px;
+}
+
+.status-list {
+  @include flex(row);
+  justify-content: space-between;
+  margin: auto;
+  padding: 20px 10px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.status {
+  @include flex(column);
+
+  text-align: center;
+  margin: auto;
+
+  span {
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
+
+.status-colors {
+  @include flex(row);
+  height: 10px;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+}
+
+#status-name {
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px 20px 5px 20px;
+  white-space: nowrap;
+}
+
+#status-value {
+  font-weight: bold;
+}

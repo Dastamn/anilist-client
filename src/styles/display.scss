@@ -1,0 +1,29 @@
+@import "./config";
+
+.display {
+  @include flex(column);
+  @include scrollbar;
+  height: 100%;
+  padding: 35px 50px;
+  background-color: $dark-bg-color;
+  color: white;
+
+  #list {
+    margin-bottom: 40px;
+  }
+
+  #list,
+  #last {
+    h1 {
+      font-size: 1.7em;
+    }
+  }
+
+  @media (max-width: $breakpoint) {
+    padding: 35px 25px;
+
+    #last {
+      margin-bottom: 120px;
+    }
+  }
+}

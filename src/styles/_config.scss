@@ -1,0 +1,38 @@
+$dark-bg-color: #192734;
+$light-bg-color: #192734;
+$lighter-bg-color: #253341;
+$navbar-bg-color: #16202b;
+$primary-color: #1da1f2;
+
+$navbar-width: 60px;
+$display-width: calc(100% - #{$navbar-width});
+$breakpoint: 768px;
+
+$outer-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05),
+  10px 15px 30px 5px rgba(0, 0, 0, 0.1);
+
+@mixin flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(211, 211, 211, 0.397);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light-bg-color;
+  }
+
+  & {
+    scrollbar-face-color: rgba(211, 211, 211, 0.397);
+    scrollbar-track-color: $light-bg-color;
+  }
+}

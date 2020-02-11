@@ -1,0 +1,199 @@
+@import "./config";
+
+$img-height: 265px;
+$img-width: 185px;
+
+.media {
+  @include flex(row);
+
+  cursor: pointer;
+  box-shadow: $outer-shadow;
+  height: $img-height;
+  border-radius: 5px;
+  background-color: $lighter-bg-color;
+  margin-right: 13px;
+
+  #image {
+    width: $img-width;
+    border-radius: 5px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #info-not-hidden {
+    margin: 0;
+    width: $img-width;
+  }
+
+  #info {
+    margin: 0;
+    overflow: hidden;
+    width: 0;
+    transition: all 0.5s ease;
+  }
+
+  &:hover {
+    #info {
+      width: $img-width;
+      transition-delay: 270ms;
+    }
+  }
+
+  #text {
+    @include flex(column);
+
+    overflow: hidden;
+    padding: 10px;
+    width: $img-width;
+    text-transform: capitalize;
+
+    #header {
+      color: $primary-color;
+    }
+
+    h1 {
+      font-size: 17px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: lightgray;
+    }
+  }
+}
+
+.media-list-container {
+  height: 335px;
+  width: 100%;
+
+  h1 {
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+}
+
+.media-list {
+  @include flex(row);
+  @include scrollbar();
+
+  padding: 12px 0;
+  overflow: hidden;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  @media (max-width: $breakpoint), (max-width: 1024px) {
+    overflow-x: scroll;
+  }
+
+  &:hover {
+    overflow-x: scroll;
+  }
+}
+
+.media-rank {
+  @include flex(row);
+
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  width: 100%;
+
+  @media (max-width: $breakpoint) {
+    flex-direction: column;
+  }
+
+  div {
+    @include flex(row);
+
+    cursor: pointer;
+    align-items: center;
+    background-color: $lighter-bg-color;
+    border-radius: 5px;
+    padding: 7px 10px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: lighten($color: $lighter-bg-color, $amount: 10);
+    }
+  }
+
+  div:nth-child(2) {
+    margin-left: 20px;
+
+    @media (max-width: $breakpoint) {
+      margin-left: 0;
+      margin-top: 7px;
+    }
+  }
+
+  img {
+    height: 15px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.media-details {
+  background-color: $lighter-bg-color;
+  padding: 12px;
+  font-size: 15px;
+  margin-bottom: 25px;
+  width: 100%;
+  border-radius: 5px;
+
+  @media (max-width: $breakpoint) {
+    @include flex(row);
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  &.elem {
+    @include flex(column);
+    padding: 0;
+    margin: 7px;
+    text-transform: capitalize;
+    overflow-x: hidden;
+
+    a {
+      text-decoration: none;
+      transition: color 0.5s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    @media (max-width: $breakpoint) {
+      min-width: fit-content;
+      padding-right: 20px;
+    }
+  }
+}
+
+.genre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: $lighter-bg-color;
+  border-radius: 17px;
+  font-weight: bold;
+  margin: 5px;
+  padding: 10px 15px;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: lighten($color: $lighter-bg-color, $amount: 10);
+  }
+}
+
+.genre-list {
+  @include flex(row);
+  overflow-x: auto;
+}

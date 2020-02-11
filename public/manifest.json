@@ -1,6 +1,6 @@
 {
-  "short_name": "Anilist client",
-  "name": "Anilist client",
+  "short_name": "Kensoku",
+  "name": "Kensoku - Unofficial Anilist client",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

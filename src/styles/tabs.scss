@@ -1,0 +1,46 @@
+@import "./config";
+
+.tabs {
+  width: 100%;
+}
+
+.tab-header {
+  @include flex(row);
+
+  justify-content: space-around;
+  border-radius: 17px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: $navbar-bg-color;
+  margin: 5px;
+
+  span {
+    cursor: pointer;
+    border-radius: 17px;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    padding: 10px 15px;
+    transition: all 0.5s ease;
+    color: gray;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  #active {
+    background-color: $lighter-bg-color;
+    color: white;
+    padding: 10px 15px;
+  }
+}
+
+.tab-pane {
+  width: 100%;
+  padding: 20px 0;
+  overflow: hidden;
+}

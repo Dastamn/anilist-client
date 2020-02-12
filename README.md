@@ -1,3 +1,3 @@
-# Kensaku
+# Kensoku
 
 Unofficial Anilist client

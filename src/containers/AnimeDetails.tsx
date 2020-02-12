@@ -33,7 +33,11 @@ export default withRouter<RouteComponentProps<any>, any>(
     }, [data]);
 
     if (loading || error) {
-      return <Loading error={error?.message} />;
+      return (
+        <div style={{ height: "100vh" }}>
+          <Loading error={error?.message} />
+        </div>
+      );
     }
 
     const { Media } = data;

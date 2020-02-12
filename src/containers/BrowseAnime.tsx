@@ -25,7 +25,7 @@ export default () => {
   return (
     <div className="display">
       <h1 style={{ fontSize: "2.5em", marginBottom: "30px" }}>Animes</h1>
-      <section id="list">
+      <section>
         <MediaList
           title={`Seasonal - ${season.toLowerCase()} ${year}`}
           data={
@@ -54,7 +54,7 @@ export default () => {
           error={seasonal.error?.message}
         />
       </section>
-      <section id="list">
+      <section>
         <MediaList
           title="Trending"
           data={
@@ -83,7 +83,7 @@ export default () => {
           error={trending.error?.message}
         />
       </section>
-      <section id="list">
+      <section>
         <MediaList
           title="Upcoming"
           data={
@@ -112,7 +112,7 @@ export default () => {
           error={upcoming.error?.message}
         />
       </section>
-      <section id="list">
+      <section>
         <MediaList
           title="Top Ranked"
           data={
@@ -141,7 +141,7 @@ export default () => {
           error={topRanked.error?.message}
         />
       </section>
-      <section id="last">
+      <section>
         <MediaList
           title="Most Popular"
           data={

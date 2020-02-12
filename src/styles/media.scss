@@ -12,6 +12,7 @@ $img-width: 185px;
   border-radius: 5px;
   background-color: $lighter-bg-color;
   margin-right: 13px;
+  user-select: none;
 
   #image {
     width: $img-width;
@@ -100,6 +101,7 @@ $img-width: 185px;
   font-weight: 500;
   margin-bottom: 10px;
   width: 100%;
+  user-select: none;
 
   @media (max-width: $breakpoint) {
     flex-direction: column;
@@ -187,6 +189,7 @@ $img-width: 185px;
   padding: 10px 15px;
   white-space: nowrap;
   transition: all 0.5s ease;
+  user-select: none;
 
   &:hover {
     background-color: lighten($color: $lighter-bg-color, $amount: 10);
@@ -196,4 +199,5 @@ $img-width: 185px;
 .genre-list {
   @include flex(row);
   overflow-x: auto;
+  padding: 3px 0;
 }

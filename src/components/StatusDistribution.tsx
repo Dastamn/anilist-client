@@ -50,7 +50,7 @@ export default ({ data, type }: Props) => {
       <div className="status-container">
         <div className="status-list">
           {data.map(({ status, amount }, index) => (
-            <div className="status">
+            <div key={status} className="status">
               <span
                 id="status-name"
                 key={index}
@@ -75,9 +75,10 @@ export default ({ data, type }: Props) => {
         <div className="status-colors">
           {percentages.map((value, index) => (
             <div
+              key={index}
               style={{
                 backgroundColor: colors[index],
-                width: `${percentages[index]}%`
+                width: `${value}%`
               }}
             />
           ))}

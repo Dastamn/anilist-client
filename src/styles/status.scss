@@ -3,6 +3,8 @@
 .status-container {
   background-color: $lighter-bg-color;
   border-radius: 5px;
+  cursor: default;
+  user-select: none;
 }
 
 .status-list {

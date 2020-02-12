@@ -29,14 +29,23 @@ export default ({ error }: Props) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%"
+        height: "100%",
+        textAlign: "center"
       }}
     >
       {error ? (
         <>
-          <img src={sakura} style={{ marginTop: "25px", height: "100px" }} />
+          <img
+            alt="error"
+            src={sakura}
+            style={{ marginTop: "25px", height: "100px" }}
+          />
           <span
-            style={{ marginTop: "12px", fontSize: "13px", fontWeight: 500 }}
+            style={{
+              margin: "12px 30px 0 30px",
+              fontSize: "13px",
+              fontWeight: 500
+            }}
           >
             {error}
           </span>

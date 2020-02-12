@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import MediaRank from "../components/MediaRank";
 import "../styles/anime.scss";
@@ -13,146 +12,13 @@ import Genres from "../components/Genres";
 import Loading from "../components/Loading";
 import Tabs from "../components/Tabs";
 import StatusDistribution from "../components/StatusDistribution";
-
-const GET_ANIME = gql`
-  query($id: Int) {
-    Media(id: $id) {
-      description
-      averageScore
-      trending
-      favourites
-      popularity
-      format
-      source
-      episodes
-      duration
-      hashtag
-      genres
-      bannerImage
-      status
-      startDate {
-        day
-        month
-        year
-      }
-      rankings {
-        rank
-        type
-        allTime
-        season
-        year
-      }
-      nextAiringEpisode {
-        airingAt
-        timeUntilAiring
-        episode
-      }
-      tags {
-        name
-        category
-        isMediaSpoiler
-        rank
-      }
-      trailer {
-        id
-        site
-        thumbnail
-      }
-      title {
-        english
-        romaji
-        native
-      }
-      coverImage {
-        large
-        extraLarge
-      }
-
-      studios(isMain: true) {
-        nodes {
-          id
-          name
-        }
-      }
-
-      relations {
-        edges {
-          relationType
-          node {
-            id
-            type
-            format
-            averageScore
-            genres
-            title {
-              romaji
-            }
-            coverImage {
-              extraLarge
-            }
-          }
-        }
-      }
-
-      characters(sort: ROLE, page: 1, perPage: 10) {
-        edges {
-          id
-          role
-          node {
-            name {
-              full
-            }
-            image {
-              large
-            }
-          }
-        }
-      }
-
-      stats {
-        statusDistribution {
-          status
-          amount
-        }
-      }
-
-      recommendations(sort: RATING_DESC) {
-        nodes {
-          mediaRecommendation {
-            id
-            type
-            format
-            averageScore
-            genres
-            title {
-              romaji
-            }
-            coverImage {
-              extraLarge
-            }
-          }
-        }
-      }
-
-      reviews(limit: 5, sort: RATING_DESC) {
-        nodes {
-          body
-          summary
-          score
-          rating
-        }
-      }
-    }
-  }
-`;
+import { getAnimeById } from "../api/queries/anime";
 
 export default withRouter<RouteComponentProps<any>, any>(
   (props: RouteComponentProps<any>) => {
     const { match } = props;
     const id = match.params.id;
-    const { loading, data, error } = useQuery(GET_ANIME, {
-      variables: { id }
-    });
+    const { loading, data, error } = useQuery(getAnimeById(id));
 
     useEffect(() => {
       const banner = document.getElementById("banner");
@@ -171,7 +37,6 @@ export default withRouter<RouteComponentProps<any>, any>(
     }
 
     const { Media } = data;
-    console.log(Media);
 
     const { startDate } = Media;
 
@@ -283,6 +148,7 @@ export default withRouter<RouteComponentProps<any>, any>(
             )}
             <MediaDetails data={details} />
           </div>
+
           <div className="related">
             <div>
               <section>
@@ -362,8 +228,6 @@ export default withRouter<RouteComponentProps<any>, any>(
                   />
                 </section>
               )}
-
-              <div id="margin" />
             </div>
           </div>
         </div>

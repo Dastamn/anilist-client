@@ -31,7 +31,7 @@ body {
 
   @media (max-width: $breakpoint) {
     width: 100vw;
-    height: 100vh;
+    margin-bottom: $navbar-width;
   }
 }
 

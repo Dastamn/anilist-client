@@ -9,11 +9,11 @@
 
   justify-content: space-around;
   border-radius: 17px;
-  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   background-color: $navbar-bg-color;
   margin: 5px;
+  user-select: none;
 
   span {
     cursor: pointer;

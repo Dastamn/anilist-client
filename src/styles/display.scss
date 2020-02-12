@@ -8,12 +8,9 @@
   background-color: $dark-bg-color;
   color: white;
 
-  #list {
-    margin-bottom: 40px;
-  }
+  section {
+    margin-bottom: 35px;
 
-  #list,
-  #last {
     h1 {
       font-size: 1.7em;
     }
@@ -21,9 +18,5 @@
 
   @media (max-width: $breakpoint) {
     padding: 35px 25px;
-
-    #last {
-      margin-bottom: 120px;
-    }
   }
 }

@@ -34,7 +34,7 @@ export default withRouter<RouteComponentProps<any>, any>(
 
     if (loading || error) {
       return (
-        <div style={{ height: "100vh" }}>
+        <div style={{ height: "85vh" }}>
           <Loading error={error?.message} />
         </div>
       );

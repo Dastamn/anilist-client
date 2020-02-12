@@ -199,5 +199,6 @@ $img-width: 185px;
 .genre-list {
   @include flex(row);
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 3px 0;
 }

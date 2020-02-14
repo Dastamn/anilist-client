@@ -21,5 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #other
-src/react-app-env.d.ts
 yarn.lock

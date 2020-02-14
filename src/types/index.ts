@@ -1,14 +1,77 @@
-export type Sort = "SCORE_DESC" | "TRENDING_DESC" | "POPULARITY_DESC";
+export type Season = "WINTER" | "SPRING" | "SUMMER" | "FALL";
+export type MediaSort = "SCORE_DESC" | "TRENDING_DESC" | "POPULARITY_DESC";
+export type MediaType = "ANIME" | "MANGA";
+export type CharacterRole = "MAIN" | "SUPPORTING" | "BACKGROUND";
 
-export interface IMedia {
+export type RelationType =
+  | "ADAPTATION"
+  | "PREQUEL"
+  | "SEQUEL"
+  | "PARENT"
+  | "SIDE_STORY"
+  | "CHARACTER"
+  | "SUMMARY"
+  | "ALTERNATIVE"
+  | "SPIN_OFF"
+  | "OTHER"
+  | "SOURCE"
+  | "COMPILATION"
+  | "CONTAINS";
+
+export type MediaSource =
+  | "ORIGINAL"
+  | "MANGA"
+  | "LIGHT_NOVEL"
+  | "VISUAL_NOVEL"
+  | "VIDEO_GAME"
+  | "OTHER"
+  | "NOVEL"
+  | "DOUJINSHI"
+  | "ANIME";
+
+export type MediaStatus =
+  | "FINISHED"
+  | "RELEASING"
+  | "NOT_YET_RELEASED"
+  | "CANCELLED";
+
+export type MediaFormat =
+  | "TV"
+  | "TV_SHORT"
+  | "MOVIE"
+  | "SPECIAL"
+  | "OVA"
+  | "ONA"
+  | "MUSIC"
+  | "MANGA"
+  | "NOVEL"
+  | "ONE_SHOT";
+
+export type DistributionStatus =
+  | "CURRENT"
+  | "PLANNING"
+  | "COMPLETED"
+  | "DROPPED"
+  | "PAUSED"
+  | "REPEATING";
+
+export interface Ranking {
+  type: "RATED" | "POPULAR";
+  rank: number;
+  allTime: boolean;
+  season: string | null;
+  year: string | null;
+}
+
+export interface IMediaCard {
   id: number;
   title: string;
   cover: string;
-  type: string;
-  format: string;
-  score: number | null;
+  type: MediaType;
+  format: MediaFormat;
+  source: MediaSource;
+  averageScore: number | null;
   genres: string[];
-  header?: string;
 }
 
 export interface ICharacter {
@@ -18,114 +81,128 @@ export interface ICharacter {
   role: string;
 }
 
-// export interface Anime {
-//   description: string;
-//   averageScore: number;
-//   trending: number
-//   favourites
-//   popularity
-//   format
-//   source
-//   episodes
-//   duration
-//   hashtag
-//   genres
-//   bannerImage
-//   status
-//   startDate {
-//     day
-//     month
-//     year
-//   }
-//   rankings {
-//     rank
-//     type
-//     allTime
-//     season
-//     year
-//   }
-//   nextAiringEpisode {
-//     airingAt
-//     timeUntilAiring
-//     episode
-//   }
-//   tags {
-//     name
-//     category
-//     isMediaSpoiler
-//     rank
-//   }
-//   trailer {
-//     id
-//     site
-//     thumbnail
-//   }
-//   title {
-//     english
-//     romaji
-//     native
-//   }
-//   coverImage {
-//     large
-//     extraLarge
-//   }
+export interface ShortMedia {
+  id: number;
+  type: MediaType;
+  format: MediaFormat;
+  averageScore: number | null;
+  genres: string[];
+  source: MediaSource;
+  title: {
+    romaji: string;
+  };
+  coverImage: {
+    extraLarge: string;
+  };
+}
 
-//   studios(isMain: true) {
-//     nodes {
-//       id
-//       name
-//     }
-//   }
+export interface PageInfo {
+  total: number;
+  currentpage: number;
+  lastpage: number;
+  hasNextPage: boolean;
+  peräge: number;
+}
 
-//   relations {
-//     edges {
-//       relationType
-//       node {
-//         id
-//         type
-//         format
-//         averageScore
-//         genres
-//         title {
-//           romaji
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
+export interface PaginatedMedia {
+  Page: {
+    pageInfo: PageInfo;
+    media: ShortMedia[];
+  };
+}
 
-//   characters(sort: ROLE, page: 1, perPage: 10) {
-//     edges {
-//       id
-//       role
-//       node {
-//         name {
-//           full
-//         }
-//         image {
-//           large
-//         }
-//       }
-//     }
-//   }
+export interface IMedia {
+  // anime
+  episodes: number;
+  duration: number;
+  nextAiringEpisode: {
+    airingAt: number;
+    timeUntilAiring: number;
+    episode: number;
+  };
+  studios: {
+    nodes: {
+      id: number;
+      name: string;
+    }[];
+  };
 
-//   recommendations(sort: RATING) {
-//     nodes {
-//       mediaRecommendation {
-//         id
-//         type
-//         format
-//         averageScore
-//         genres
-//         title {
-//           romaji
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// }
+  // manga
+  chapters: number | null;
+  volumes: number | null;
+
+  // both
+  type: MediaType;
+  description: string;
+  genres: string[];
+  averageScore: number | null;
+  bannerImage: string | null;
+  status: MediaStatus;
+  format: MediaFormat;
+  source: MediaSource;
+  countryOfOrigin: string;
+  title: {
+    english: string;
+    romaji: string;
+    native: string;
+  };
+  coverImage: {
+    large: string;
+    extraLarge: string;
+  };
+  startDate: {
+    day: number | null;
+    month: number | null;
+    year: number | null;
+  };
+  endDate: {
+    day: number | null;
+    month: number | null;
+    year: number | null;
+  };
+  trailer: {
+    id: string;
+    site: string;
+    thumbnail: string;
+  };
+  rankings: Ranking[];
+  relations: {
+    edges: {
+      relationType: RelationType;
+      node: ShortMedia;
+    }[];
+  };
+  characters: {
+    edges: {
+      id: number;
+      role: CharacterRole;
+      node: {
+        name: {
+          full: string;
+        };
+        image: {
+          large: string;
+        };
+      };
+    }[];
+  };
+  stats: {
+    statusDistribution: {
+      status: DistributionStatus;
+      amount: number;
+    }[];
+  };
+  recommendations: {
+    nodes: {
+      mediaRecommendation: ShortMedia;
+    }[];
+  };
+  reviews: {
+    nodes: {
+      body: string;
+      summary: string;
+      score: number;
+      rating: number | null;
+    };
+  };
+}

@@ -1,17 +1,17 @@
 import React from "react";
 import "../styles/media.scss";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { IMedia } from "../types";
+import { IMediaCard } from "../types";
 import { prettyString, styleScore } from "../util";
 
 interface Props extends RouteComponentProps<any> {
-  data: IMedia;
+  data: IMediaCard;
   open?: boolean;
 }
 
 const Media = (props: Props) => {
   const {
-    data: { id, type, title, cover, format, genres, score, header },
+    data: { id, type, title, cover, format, genres, averageScore, source },
     history,
     open
   } = props;
@@ -23,8 +23,9 @@ const Media = (props: Props) => {
       <div id="image" style={{ backgroundImage: `url(${cover})` }} />
       <div id={`info${open ? "-not-hidden" : ""}`}>
         <div id="text">
-          {header && <span id="header">{header}</span>}
-          <span id="header">{prettyString(format)}</span>
+          <span id="header">
+            {prettyString(type === "ANIME" ? format : source)}
+          </span>
           <h1 style={{ margin: 0 }}>{title}</h1>
           {genres && (
             <span>
@@ -34,7 +35,7 @@ const Media = (props: Props) => {
               )}
             </span>
           )}
-          {styleScore(score)}
+          {styleScore(averageScore)}
         </div>
       </div>
     </div>

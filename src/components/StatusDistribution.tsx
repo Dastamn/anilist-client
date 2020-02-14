@@ -1,25 +1,18 @@
 import React from "react";
 import "../styles/status.scss";
 import { prettyString } from "../util";
-
-type Status =
-  | "CURRENT"
-  | "PLANNING"
-  | "COMPLETED"
-  | "DROPPED"
-  | "PAUSED"
-  | "REPEATING";
+import { DistributionStatus, MediaType } from "../types";
 
 interface Props {
   data: {
-    status: Status;
+    status: DistributionStatus;
     amount: number;
   }[];
-  type: "anime" | "manga";
+  type: MediaType;
 }
 
 export default ({ data, type }: Props) => {
-  const getColor = (status: Status) => {
+  const getColor = (status: DistributionStatus) => {
     switch (status) {
       case "CURRENT":
         return "green";
@@ -57,7 +50,7 @@ export default ({ data, type }: Props) => {
                 style={{ backgroundColor: colors[index] }}
               >
                 {status === "CURRENT"
-                  ? type === "anime"
+                  ? type === "ANIME"
                     ? "Watching"
                     : "Reading"
                   : prettyString(status)}

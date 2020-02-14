@@ -1,6 +1,6 @@
 @import "./config";
 
-.display {
+.browse {
   @include flex(column);
   @include scrollbar;
   height: 100%;

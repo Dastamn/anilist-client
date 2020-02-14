@@ -1,12 +1,12 @@
 import React from "react";
-import { IMedia } from "../types";
+import { IMediaCard } from "../types";
 import "../styles/media.scss";
-import Media from "./Media";
+import MediaCard from "./MediaCard";
 import Loading from "./Loading";
 
 interface Props {
   title: String;
-  data: IMedia[] | undefined;
+  data: IMediaCard[] | undefined;
   error?: string | undefined;
 }
 
@@ -18,7 +18,7 @@ export default (props: Props) => {
       {data ? (
         <div className="media-list">
           {data.map((media, index) => (
-            <Media key={index} data={media} />
+            <MediaCard key={index} data={media} />
           ))}
         </div>
       ) : (

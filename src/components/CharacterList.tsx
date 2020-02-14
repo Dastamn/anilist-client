@@ -1,5 +1,5 @@
 import React from "react";
-import Character from "./Character";
+import CharacterCard from "./CharacterCard";
 import { ICharacter } from "../types";
 import "../styles/media.scss";
 
@@ -13,7 +13,7 @@ export default ({ data }: Props) => {
       <h1>Characters</h1>
       <div className="media-list">
         {data.map((character, index) => (
-          <Character key={index} data={character} />
+          <CharacterCard key={index} data={character} />
         ))}
       </div>
     </div>

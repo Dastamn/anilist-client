@@ -2,26 +2,11 @@ import React from "react";
 import "../styles/media.scss";
 import star from "../assets/star.svg";
 import heart from "../assets/heart.svg";
-
-interface Rating {
-  rank: number;
-  type: "RATED";
-  allTime: boolean;
-  season: string | null;
-  year: number | null;
-}
-
-interface Popularity {
-  rank: number;
-  type: "POPULAR";
-  allTime: boolean;
-  season: string | null;
-  year: number | null;
-}
+import { Ranking } from "../types";
 
 interface Props {
-  rating: Rating | undefined;
-  popularity: Popularity | undefined;
+  rating: Ranking | undefined;
+  popularity: Ranking | undefined;
 }
 
 export default ({ rating, popularity }: Props) => (

@@ -45,7 +45,6 @@ export const getSeason = (date: Date) => {
     case 11:
       return "FALL";
   }
-  return "";
 };
 
 export const styleScore = (score: number | null) => {

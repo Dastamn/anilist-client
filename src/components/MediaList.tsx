@@ -1,24 +1,25 @@
 import React from "react";
-import { IMediaCard } from "../types";
+import { IMediaCard, MediaCardSize, IMediaBanner } from "../types";
 import "../styles/media.scss";
-import MediaCard from "./MediaCard";
+import MediaCard from "./media/MediaCard";
 import Loading from "./Loading";
 
 interface Props {
-  title: String;
+  title?: string;
   data: IMediaCard[] | undefined;
+  size?: MediaCardSize;
   error?: string | undefined;
 }
 
 export default (props: Props) => {
-  const { title, data, error } = props;
+  const { title, data, size, error } = props;
   return (
     <div className="media-list-container">
-      <h1>{title}</h1>
+      {title && <h1>{title}</h1>}
       {data ? (
         <div className="media-list">
           {data.map((media, index) => (
-            <MediaCard key={index} data={media} />
+            <MediaCard key={index} data={media} size={size} />
           ))}
         </div>
       ) : (

@@ -1,17 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import MediaList from "../components/MediaList";
-import { getSeason } from "../util";
-import { MediaType, ShortMedia, PaginatedMedia, Season } from "../types";
-import { getMediaList } from "../api/queries";
+import { getSeason, selectRandom } from "../util";
+import {
+  MediaType,
+  ShortMedia,
+  PaginatedMedia,
+  Season,
+  SortedMedia
+} from "../types";
+import {
+  getMediaList,
+  getSortedMediaByStatus,
+  getSortedMedia
+} from "../api/queries";
 import "../styles/browse.scss";
 import { ApolloCurrentQueryResult } from "apollo-boost";
+import BannerList from "../components/media/BannerList";
+import GroupList from "../components/media/GroupList";
 
 interface Props {
   type: MediaType;
 }
 
+const genres = [
+  "Adventure",
+  "Comedy",
+  "Fantasy",
+  "Ecchi",
+  "Romance",
+  "Sports",
+  "Psychological",
+  "Supernatural"
+];
+
+const tags = ["Seinen", "Shounen", "Shoujo", "Harem", "Isekai"];
+
 export default ({ type }: Props) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const season = getSeason(date);
+
+  const [state, setState] = useState({
+    genres: [] as string[],
+    tags: [] as string[]
+  });
+
+  useEffect(() => {
+    setState({ genres: selectRandom(genres, 5), tags });
+  }, []);
+
+  const bannerListDate = [
+    type === "ANIME"
+      ? {
+          query: getSortedMedia(
+            type,
+            "FAVOURITES_DESC",
+            undefined,
+            undefined,
+            season,
+            year
+          ),
+          comment: "Favourite this season"
+        }
+      : {
+          query: getSortedMediaByStatus(type, "FAVOURITES_DESC", "RELEASING"),
+          comment: "Current Favourite"
+        },
+    ...state.genres.map(genre => ({
+      query: getSortedMediaByStatus(type, "SCORE_DESC", "RELEASING", [genre]),
+      comment: `Best ${genre}`
+    })),
+    ...state.tags.map(tag => ({
+      query: getSortedMediaByStatus(
+        type,
+        "SCORE_DESC",
+        "RELEASING",
+        undefined,
+        [tag]
+      ),
+      comment: `Best ${tag}`
+    }))
+  ];
+
   const trending: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
     getMediaList(1, 10, type, "TRENDING_DESC")
   );
@@ -21,10 +92,6 @@ export default ({ type }: Props) => {
   const popular: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
     getMediaList(1, 10, type, "POPULARITY_DESC")
   );
-
-  const date = new Date();
-  const year = date.getFullYear();
-  const season = getSeason(date);
 
   const seasonal: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
     getMediaList(1, 50, type, undefined, season, year)
@@ -48,29 +115,10 @@ export default ({ type }: Props) => {
           marginBottom: "30px",
           textTransform: "capitalize"
         }}
-      >{`${type.toLowerCase()}s`}</h1>
-      {type === "ANIME" && (
-        <section>
-          <MediaList
-            title={`Seasonal - ${season ? season.toLowerCase() : ""} ${year}`}
-            data={
-              seasonal.data
-                ? seasonal.data.Page.media.map(media => ({
-                    id: media.id,
-                    type: media.type,
-                    title: media.title.romaji,
-                    cover: media.coverImage.extraLarge,
-                    format: media.format,
-                    genres: media.genres,
-                    source: media.source,
-                    averageScore: media.averageScore
-                  }))
-                : undefined
-            }
-            error={seasonal.error?.message}
-          />
-        </section>
-      )}
+      >
+        {type.toLowerCase()}
+      </h1>
+      <BannerList data={bannerListDate} />
       <section>
         <MediaList
           title="Trending"
@@ -80,7 +128,7 @@ export default ({ type }: Props) => {
                   id: media.id,
                   type: media.type,
                   title: media.title.romaji,
-                  cover: media.coverImage.extraLarge,
+                  coverImage: media.coverImage.large,
                   format: media.format,
                   genres: media.genres,
                   source: media.source,
@@ -93,6 +141,27 @@ export default ({ type }: Props) => {
       </section>
       {type === "ANIME" && (
         <section>
+          <GroupList
+            title={`Seasonal - ${season ? season.toLowerCase() : ""} ${year}`}
+            data={
+              seasonal.data
+                ? seasonal.data.Page.media.map(media => ({
+                    id: media.id,
+                    type: media.type,
+                    title: media.title.romaji,
+                    coverImage: media.coverImage.medium,
+                    format: media.format,
+                    genres: media.genres,
+                    source: media.source,
+                    averageScore: media.averageScore
+                  }))
+                : undefined
+            }
+          />
+        </section>
+      )}
+      {type === "ANIME" && (
+        <section>
           <MediaList
             title="Upcoming"
             data={
@@ -101,7 +170,7 @@ export default ({ type }: Props) => {
                     id: media.id,
                     type: media.type,
                     title: media.title.romaji,
-                    cover: media.coverImage.extraLarge,
+                    coverImage: media.coverImage.large,
                     format: media.format,
                     genres: media.genres,
                     source: media.source,
@@ -114,7 +183,7 @@ export default ({ type }: Props) => {
         </section>
       )}
       <section>
-        <MediaList
+        <GroupList
           title="Top Ranked"
           data={
             topRanked.data
@@ -122,7 +191,7 @@ export default ({ type }: Props) => {
                   id: media.id,
                   type: media.type,
                   title: media.title.romaji,
-                  cover: media.coverImage.extraLarge,
+                  coverImage: media.coverImage.medium,
                   format: media.format,
                   genres: media.genres,
                   source: media.source,
@@ -130,11 +199,10 @@ export default ({ type }: Props) => {
                 }))
               : undefined
           }
-          error={topRanked.error?.message}
         />
       </section>
       <section>
-        <MediaList
+        <GroupList
           title="Most Popular"
           data={
             popular.data
@@ -142,7 +210,7 @@ export default ({ type }: Props) => {
                   id: media.id,
                   type: media.type,
                   title: media.title.romaji,
-                  cover: media.coverImage.extraLarge,
+                  coverImage: media.coverImage.medium,
                   format: media.format,
                   genres: media.genres,
                   source: media.source,
@@ -150,7 +218,6 @@ export default ({ type }: Props) => {
                 }))
               : undefined
           }
-          error={popular.error?.message}
         />
       </section>
     </div>

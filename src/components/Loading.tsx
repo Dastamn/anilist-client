@@ -28,7 +28,7 @@ export default ({ error }: Props) => {
       {error ? (
         <div className="loading error">
           <img alt="error" src={sakura} />
-          <span>{error}</span>
+          <span>{error || "Something happened..."}</span>
         </div>
       ) : (
         <img src={loading} alt="Loading..." />

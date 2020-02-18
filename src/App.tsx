@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Browse from "./containers/Browse";
 import Media from "./containers/Media";
+import Search from "./containers/Search";
 
 const App = () => {
   return (
@@ -29,8 +30,17 @@ const App = () => {
               path="/manga"
               render={props => <Browse {...props} type="MANGA" />}
             />
-            <Route exact path="/anime/:id" component={Media} />
-            <Route exact path="/manga/:id" component={Media} />
+            <Route
+              exact
+              path="/anime/:id"
+              render={props => <Media {...props} type="ANIME" />}
+            />
+            <Route
+              exact
+              path="/manga/:id"
+              render={props => <Media {...props} type="MANGA" />}
+            />
+            <Route exact path="/search" component={Search} />
             <Redirect exact from="*" to="/anime" />
           </Switch>
         </div>

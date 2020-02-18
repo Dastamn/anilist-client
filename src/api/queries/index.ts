@@ -1,9 +1,97 @@
-import { gql } from "apollo-boost";
-import { MediaType, MediaSort, Season } from "../../types";
+import { gql, DocumentNode } from "apollo-boost";
+import { MediaType, MediaSort, Season, MediaStatus } from "../../types";
 
-export const getMediaById = (id: number) => gql`
+export const getSortedMediaByStatus = (
+  type: MediaType,
+  sort: MediaSort,
+  status?: MediaStatus,
+  genres?: string[],
+  tags?: string[]
+): DocumentNode => gql`
 query {
-  Media(id: ${id}) {
+  Media(type: ${type}, sort: ${sort}${
+  genres
+    ? `, genre_in: [${genres.reduce(
+        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
+        ""
+      )}]`
+    : ""
+}${
+  tags
+    ? `, tag_in: [${tags.reduce(
+        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
+        ""
+      )}]`
+    : ""
+}
+        ${status ? `, status_in: ${status}` : ""}) {
+    id
+    type
+    format
+    averageScore
+    genres
+    source
+    bannerImage
+    title {
+      romaji
+    }
+    coverImage {
+      medium
+      large
+      extraLarge
+    }
+  }
+}
+`;
+
+export const getSortedMedia = (
+  type: MediaType,
+  sort: MediaSort,
+  genres?: string[],
+  tags?: string[],
+  season?: Season,
+  seasonYear?: number
+) => gql`
+query {
+  Media(type: ${type}, sort: ${sort}${
+  genres
+    ? `, genre_in: [${genres.reduce(
+        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
+        ""
+      )}]`
+    : ""
+}${
+  tags
+    ? `, tag_in: [${tags.reduce(
+        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
+        ""
+      )}]`
+    : ""
+}
+        ${season ? `, season: ${season}` : ""}
+        ${seasonYear ? `, seasonYear: ${seasonYear}` : ""}) {
+    id
+    type
+    format
+    averageScore
+    genres
+    source
+    bannerImage
+    title {
+      romaji
+    }
+    coverImage {
+      medium
+      large
+      extraLarge
+    }
+  }
+}
+`;
+
+export const getMediaById = (id: number, type: MediaType) => gql`
+query {
+  Media(id: ${id}, type: ${type}) {
     episodes
     duration
     nextAiringEpisode {
@@ -26,6 +114,7 @@ query {
     chapters
     volumes
     
+    type
     description(asHtml: true)
     genres
     averageScore
@@ -40,6 +129,7 @@ query {
         native
     }
       coverImage {
+        medium
         large
         extraLarge
     }
@@ -73,6 +163,8 @@ query {
             romaji
           }
           coverImage {
+            medium
+            large
             extraLarge
           }
         }
@@ -110,6 +202,8 @@ query {
             romaji
           }
           coverImage {
+            medium
+            large
             extraLarge
           }
         }
@@ -158,6 +252,8 @@ query {
           romaji
         }
         coverImage {
+          medium
+          large
           extraLarge
         }
       }

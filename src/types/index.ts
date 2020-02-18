@@ -1,7 +1,13 @@
 export type Season = "WINTER" | "SPRING" | "SUMMER" | "FALL";
-export type MediaSort = "SCORE_DESC" | "TRENDING_DESC" | "POPULARITY_DESC";
+export type MediaSort =
+  | "SCORE_DESC"
+  | "TRENDING_DESC"
+  | "POPULARITY_DESC"
+  | "FAVOURITES_DESC";
 export type MediaType = "ANIME" | "MANGA";
 export type CharacterRole = "MAIN" | "SUPPORTING" | "BACKGROUND";
+
+export type MediaCardSize = "SMALL" | "DEFAULT";
 
 export type RelationType =
   | "ADAPTATION"
@@ -63,15 +69,43 @@ export interface Ranking {
   year: string | null;
 }
 
+export interface CoverImage {
+  medium: string;
+  large: string;
+  extraLarge: string;
+}
+
+export interface SortedMedia {
+  id: number;
+  type: string;
+  bannerImage: string;
+  title: {
+    romaji: string;
+  };
+  coverImage: {
+    extraLarge: string;
+  };
+}
+
+export interface IMediaBanner {
+  id: number;
+  type: MediaType;
+  title: { romaji: string };
+  bannerImage: string;
+  coverImage: { extraLarge: string };
+}
+
 export interface IMediaCard {
   id: number;
   title: string;
-  cover: string;
+  coverImage: string;
+  bannerImage?: string;
   type: MediaType;
   format: MediaFormat;
   source: MediaSource;
   averageScore: number | null;
   genres: string[];
+  comment?: string;
 }
 
 export interface ICharacter {
@@ -91,9 +125,8 @@ export interface ShortMedia {
   title: {
     romaji: string;
   };
-  coverImage: {
-    extraLarge: string;
-  };
+  coverImage: CoverImage;
+  bannerImage?: string;
 }
 
 export interface PageInfo {

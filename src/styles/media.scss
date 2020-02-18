@@ -3,6 +3,89 @@
 $img-height: 265px;
 $img-width: 185px;
 
+.large-media {
+  @include flex(column);
+  cursor: pointer;
+  width: 370px;
+  min-width: 370px;
+  margin-right: 20px;
+
+  .img {
+    height: 200px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: $outer-shadow;
+  }
+
+  .title {
+    overflow: hidden;
+    margin-bottom: 13px;
+
+    h1,
+    h2 {
+      @include max-lines(1);
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 23px;
+    }
+
+    h2 {
+      font-size: 21px;
+      font-weight: 500;
+      color: rgb(143, 143, 143);
+    }
+  }
+}
+
+.small-media {
+  @include flex(row);
+
+  cursor: pointer;
+  background-color: $lighter-bg-color;
+  border-radius: 5px;
+  width: 320px;
+  min-width: 320px;
+  max-height: 141px;
+  box-shadow: $outer-shadow;
+
+  .img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px 0 0 5px;
+    min-width: 100px;
+    height: 141px;
+  }
+
+  .text {
+    @include flex(column);
+    padding: 7px 10px;
+    overflow: hidden;
+    text-transform: capitalize;
+
+    .header {
+      color: $primary-color;
+    }
+
+    h1 {
+      @include max-lines(2);
+      font-size: 17.5px;
+      margin: 0;
+    }
+
+    span {
+      color: lightgray;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+}
+
 .media {
   @include flex(row);
 
@@ -14,35 +97,29 @@ $img-width: 185px;
   margin-right: 13px;
   user-select: none;
 
-  #image {
+  .img {
     width: $img-width;
     border-radius: 5px;
-    background-position: 50%;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
 
-  #info-not-hidden {
-    margin: 0;
-    width: $img-width;
-  }
-
-  #info {
+  .info {
     margin: 0;
     overflow: hidden;
     width: 0;
     transition: all 0.5s ease;
   }
 
-  &:hover,
-  &:active {
-    #info {
+  &:hover {
+    .info {
       width: $img-width;
       transition-delay: 270ms;
     }
   }
 
-  #text {
+  .text {
     @include flex(column);
 
     overflow: hidden;
@@ -50,16 +127,17 @@ $img-width: 185px;
     width: $img-width;
     text-transform: capitalize;
 
-    #header {
+    .header {
       color: $primary-color;
     }
 
     h1 {
-      font-size: 17px;
+      font-size: 18px;
+      margin: 0;
     }
 
     span {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: lightgray;
     }
@@ -70,10 +148,18 @@ $img-width: 185px;
   height: 335px;
   width: 100%;
 
+  &.grouped {
+    height: 380px;
+  }
+
   h1 {
     margin-bottom: 5px;
     text-transform: capitalize;
   }
+}
+
+.media-group {
+  @include flex(column);
 }
 
 .media-list {

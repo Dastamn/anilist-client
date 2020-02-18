@@ -1,0 +1,82 @@
+@import "./config";
+
+.filter {
+  @include flex(column);
+
+  background-color: $lighter-bg-color;
+  border-radius: 7px;
+  height: 75px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  user-select: none;
+
+  &.open {
+    height: fit-content;
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.header {
+  @include flex(row);
+
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+
+  &.text {
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    padding: 0;
+
+    h3 {
+      margin-bottom: 5px;
+    }
+    span {
+      color: $primary-color;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+  }
+
+  svg {
+    width: 20px;
+    fill: white;
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    svg {
+      fill: $primary-color;
+    }
+  }
+}
+
+.toggles {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.toggle {
+  @include flex(column);
+
+  cursor: pointer;
+  padding: 10px 12px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: lighten($color: $lighter-bg-color, $amount: 5);
+  }
+
+  &.active {
+    background-color: lighten($color: $lighter-bg-color, $amount: 5);
+  }
+}

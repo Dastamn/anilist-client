@@ -36,3 +36,11 @@ $outer-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05),
     scrollbar-track-color: $light-bg-color;
   }
 }
+
+@mixin max-lines($lines) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}

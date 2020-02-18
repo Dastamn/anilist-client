@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 export const secondsToTime = (seconds: number, minimise: boolean) => {
   let d = Math.floor(seconds / (3600 * 24));
@@ -47,9 +48,12 @@ export const getSeason = (date: Date) => {
   }
 };
 
-export const styleScore = (score: number | null) => {
+export const styleScore = (score: number | null, fontSize?: number) => {
   if (score) {
-    const style = { color: "green", fontSize: "13px" };
+    const style = {
+      color: "green",
+      fontSize: fontSize ? `${fontSize}px` : "13px"
+    };
     if (score > 50) {
       if (score < 70) {
         style.color = "orange";
@@ -60,4 +64,29 @@ export const styleScore = (score: number | null) => {
     return <span style={style}>{`${score}%`}</span>;
   }
   return null;
+};
+
+export const formatDate = ({
+  year,
+  month,
+  day
+}: {
+  year: number | null;
+  month: number | null;
+  day: number | null;
+}) =>
+  year
+    ? month
+      ? day
+        ? moment(new Date(year, month, day)).format("LL")
+        : moment(new Date(year, month)).format("LL")
+      : year.toString()
+    : null;
+
+export const selectRandom = (array: string[], count: number) => {
+  const set = new Set<string>();
+  while (set.size < count) {
+    set.add(array[Math.floor(Math.random() * array.length)]);
+  }
+  return Array.from(set);
 };

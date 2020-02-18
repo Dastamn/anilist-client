@@ -49,7 +49,7 @@ export default ({ type }: Props) => {
     setState({ genres: selectRandom(genres, 5), tags });
   }, []);
 
-  const bannerListDate = [
+  const bannerListData = [
     type === "ANIME"
       ? {
           query: getSortedMedia(
@@ -117,7 +117,7 @@ export default ({ type }: Props) => {
       >
         {type.toLowerCase()}
       </h1>
-      <BannerList data={bannerListDate} />
+      <BannerList data={bannerListData} />
       <section>
         <MediaList
           title="Trending"

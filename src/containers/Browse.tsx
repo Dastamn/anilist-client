@@ -24,7 +24,6 @@ interface Props {
 }
 
 const genres = [
-  "Adventure",
   "Comedy",
   "Fantasy",
   "Ecchi",

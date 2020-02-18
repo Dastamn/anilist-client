@@ -200,7 +200,7 @@ export default ({ type }: Props) => {
           }
         />
       </section>
-      <section>
+      <section style={{ marginBottom: 0 }}>
         <GroupList
           title="Most Popular"
           data={

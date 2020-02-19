@@ -3,12 +3,17 @@
 $img-height: 265px;
 $img-width: 185px;
 
-.large-media {
+.banner-media {
   @include flex(column);
   cursor: pointer;
   width: 370px;
   min-width: 370px;
   margin-right: 20px;
+
+  @media (max-width: $breakpoint) {
+    width: 320px;
+    min-width: 320px;
+  }
 
   .img {
     height: 200px;

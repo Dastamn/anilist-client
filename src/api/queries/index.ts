@@ -1,5 +1,11 @@
-import { gql, DocumentNode } from "apollo-boost";
+import { gql } from "apollo-boost";
 import { MediaType, MediaSort, Season, MediaStatus } from "../../types";
+
+export const GENRES = gql`
+  query {
+    GenreCollection
+  }
+`;
 
 export const getSortedMediaByStatus = (
   type: MediaType,
@@ -7,7 +13,7 @@ export const getSortedMediaByStatus = (
   status?: MediaStatus,
   genres?: string[],
   tags?: string[]
-): DocumentNode => gql`
+) => gql`
 query {
   Media(type: ${type}, sort: ${sort}${
   genres

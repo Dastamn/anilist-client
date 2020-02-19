@@ -7,9 +7,10 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import Browse from "./containers/Browse";
-import Media from "./containers/Media";
-import Search from "./containers/Search";
+import Media from "./pages/Media";
+import Search from "./pages/Search";
+import BrowseAnime from "./pages/BrowseAnime";
+import BrowseManga from "./pages/BrowseManga";
 
 const App = () => {
   return (
@@ -20,16 +21,8 @@ const App = () => {
         </div>
         <div className="main">
           <Switch>
-            <Route
-              exact
-              path="/anime"
-              render={props => <Browse {...props} type="ANIME" />}
-            />
-            <Route
-              exact
-              path="/manga"
-              render={props => <Browse {...props} type="MANGA" />}
-            />
+            <Route exact path="/anime" component={BrowseAnime} />
+            <Route exact path="/manga" component={BrowseManga} />
             <Route
               exact
               path="/anime/:id"

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default ({ data }: Props) => (
-  <div className="media-list-container">
+  <div className="media-list-container" style={{ height: "305px" }}>
     {data ? (
       <div className="media-list">
         {data.map((elem, index) => (

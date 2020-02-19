@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/media.scss";
-import star from "../assets/star.svg";
-import heart from "../assets/heart.svg";
-import { Ranking } from "../types";
+import star from "../../assets/star.svg";
+import heart from "../../assets/heart.svg";
+import { Ranking } from "../../types";
+import "../../styles/media.scss";
 
 interface Props {
   rating: Ranking | undefined;

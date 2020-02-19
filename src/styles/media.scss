@@ -190,7 +190,6 @@ $img-width: 185px;
   @include flex(row);
 
   font-size: 15px;
-  font-weight: 500;
   margin-bottom: 15px;
   width: 100%;
   user-select: none;
@@ -207,6 +206,7 @@ $img-width: 185px;
     background-color: $lighter-bg-color;
     border-radius: 5px;
     padding: 7px 10px;
+    font-weight: 500;
     transition: all 0.5s ease;
 
     &:hover {

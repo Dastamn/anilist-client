@@ -5,6 +5,7 @@ import { DocumentNode } from "graphql";
 import { ApolloCurrentQueryResult } from "apollo-boost";
 import "../../styles/media.scss";
 import { MediaType } from "../../types";
+import Loading from "../Loading";
 
 interface IMediaBanner {
   id: number;
@@ -23,8 +24,8 @@ export default withRouter<Props, any>(({ query, comment, history }: Props) => {
   const res: ApolloCurrentQueryResult<{ Media: IMediaBanner }> = useQuery(
     query
   );
-  const { data } = res;
-  if (data) {
+  const { data, loading } = res;
+  if (!loading && data) {
     const { Media } = data;
     return (
       <div

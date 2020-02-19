@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import GroupList from "../components/media/GroupList";
-import BannerList from "../components/media/BannerList";
-import MediaList from "../components/MediaList";
+import List from "../components/List";
+import MediaGroupList from "../components/media/MediaGroupList";
+import MediaCard from "../components/media/MediaCard";
+import MediaBanner from "../components/media/MediaBanner";
 import { getSortedMediaByStatus, getMediaList } from "../api/queries";
 import { ApolloCurrentQueryResult } from "apollo-boost";
 import { PaginatedMedia } from "../types";
@@ -57,30 +58,39 @@ export default () => {
         <h1 className="title">Manga</h1>
       </section>
       <section>
-        <BannerList data={bannerListData} />
+        <List>
+          {bannerListData.map((media, index) => (
+            <MediaBanner
+              key={index}
+              query={media.query}
+              comment={media.comment}
+            />
+          ))}
+        </List>
       </section>
       <section>
-        <MediaList
-          title="Trending"
-          data={
-            trending.data
-              ? trending.data.Page.media.map(media => ({
-                  id: media.id,
-                  type: media.type,
-                  title: media.title.romaji,
-                  coverImage: media.coverImage.large,
-                  format: media.format,
-                  genres: media.genres,
-                  source: media.source,
-                  averageScore: media.averageScore
-                }))
-              : undefined
-          }
-          error={trending.error?.message}
-        />
+        <List title="Trending">
+          {trending.data
+            ? trending.data.Page.media.map((media, index) => (
+                <MediaCard
+                  key={index}
+                  data={{
+                    id: media.id,
+                    type: media.type,
+                    title: media.title.romaji,
+                    coverImage: media.coverImage.large,
+                    format: media.format,
+                    genres: media.genres,
+                    source: media.source,
+                    averageScore: media.averageScore
+                  }}
+                />
+              ))
+            : undefined}
+        </List>
       </section>
       <section>
-        <GroupList
+        <MediaGroupList
           title="Top Ranked"
           data={
             topRanked.data
@@ -99,7 +109,7 @@ export default () => {
         />
       </section>
       <section style={{ marginBottom: 0 }}>
-        <GroupList
+        <MediaGroupList
           title="Most Popular"
           data={
             popular.data

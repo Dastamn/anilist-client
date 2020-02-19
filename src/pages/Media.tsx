@@ -7,13 +7,14 @@ import Loading from "../components/Loading";
 import { IMedia, RelationType, ShortMedia, MediaType } from "../types";
 import { prettyString, secondsToTime, formatDate } from "../util";
 import youtube from "../assets/youtube.svg";
-import MediaDetails from "../components/MediaDetails";
-import MediaRank from "../components/MediaRank";
+import MediaData from "../components/media/MediaData";
+import MediaRank from "../components/media/MediaRank";
 import Genres from "../components/Genres";
 import Tabs from "../components/Tabs";
 import CharacterList from "../components/CharacterList";
 import StatusDistribution from "../components/StatusDistribution";
-import MediaList from "../components/MediaList";
+import List from "../components/List";
+import MediaCard from "../components/media/MediaCard";
 import "../styles/anime.scss";
 
 interface Props extends RouteComponentProps<any> {
@@ -139,7 +140,7 @@ export default withRouter<Props, any>((props: Props) => {
               <span>Trailer</span>
             </div>
           )}
-          <MediaDetails data={details} />
+          <MediaData data={details} />
         </div>
 
         <div className="related">
@@ -184,19 +185,23 @@ export default withRouter<Props, any>((props: Props) => {
                   <div>
                     {Object.entries(relations).map((entry, index) => (
                       <section key={index}>
-                        <MediaList
-                          title={prettyString(entry[0])}
-                          data={entry[1].map(node => ({
-                            id: node.id,
-                            title: node.title.romaji,
-                            genres: node.genres,
-                            type: node.type,
-                            format: node.format,
-                            coverImage: node.coverImage.large,
-                            averageScore: node.averageScore,
-                            source: media.source
-                          }))}
-                        />
+                        <List title={prettyString(entry[0])}>
+                          {entry[1].map((node, index) => (
+                            <MediaCard
+                              key={index}
+                              data={{
+                                id: node.id,
+                                title: node.title.romaji,
+                                genres: node.genres,
+                                type: node.type,
+                                format: node.format,
+                                coverImage: node.coverImage.large,
+                                averageScore: node.averageScore,
+                                source: media.source
+                              }}
+                            />
+                          ))}
+                        </List>
                       </section>
                     ))}
                   </div>
@@ -206,19 +211,23 @@ export default withRouter<Props, any>((props: Props) => {
 
             {recommendations.length > 0 && (
               <section style={{ marginBottom: "60px" }}>
-                <MediaList
-                  title="Recommendations"
-                  data={recommendations.map(recommendation => ({
-                    id: recommendation.id,
-                    title: recommendation.title.romaji,
-                    type: recommendation.type,
-                    format: recommendation.format,
-                    coverImage: recommendation.coverImage.large,
-                    genres: recommendation.genres,
-                    averageScore: recommendation.averageScore,
-                    source: media.source
-                  }))}
-                />
+                <List>
+                  {recommendations.map((recommendation, index) => (
+                    <MediaCard
+                      key={index}
+                      data={{
+                        id: recommendation.id,
+                        title: recommendation.title.romaji,
+                        type: recommendation.type,
+                        format: recommendation.format,
+                        coverImage: recommendation.coverImage.large,
+                        genres: recommendation.genres,
+                        averageScore: recommendation.averageScore,
+                        source: media.source
+                      }}
+                    />
+                  ))}
+                </List>
               </section>
             )}
           </div>

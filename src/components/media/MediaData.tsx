@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/media.scss";
+import "../../styles/media.scss";
 
 interface Props {
   data: { [key: string]: string | number | JSX.Element | null };

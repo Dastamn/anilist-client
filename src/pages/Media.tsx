@@ -16,6 +16,7 @@ import StatusDistribution from "../components/StatusDistribution";
 import List from "../components/List";
 import MediaCard from "../components/media/MediaCard";
 import "../styles/anime.scss";
+import CharacterCard from "../components/CharacterCard";
 
 interface Props extends RouteComponentProps<any> {
   type: MediaType;
@@ -163,14 +164,18 @@ export default withRouter<Props, any>((props: Props) => {
                   <div>
                     {characters.length > 0 && (
                       <section>
-                        <CharacterList
-                          data={characters.map(({ id, role, node }) => ({
-                            id,
-                            name: node.name.full,
-                            role: prettyString(role),
-                            image: node.image.large
-                          }))}
-                        />
+                        <List title="Characters">
+                          {characters.map(({ id, role, node }) => (
+                            <CharacterCard
+                              data={{
+                                id,
+                                name: node.name.full,
+                                role: prettyString(role),
+                                image: node.image.large
+                              }}
+                            />
+                          ))}
+                        </List>
                       </section>
                     )}
                     <section>
@@ -211,7 +216,7 @@ export default withRouter<Props, any>((props: Props) => {
 
             {recommendations.length > 0 && (
               <section style={{ marginBottom: "60px" }}>
-                <List>
+                <List title="Recommendations">
                   {recommendations.map((recommendation, index) => (
                     <MediaCard
                       key={index}

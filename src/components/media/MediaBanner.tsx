@@ -4,16 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { DocumentNode } from "graphql";
 import { ApolloCurrentQueryResult } from "apollo-boost";
 import "../../styles/media.scss";
-import { MediaType } from "../../types";
-import Loading from "../Loading";
-
-interface IMediaBanner {
-  id: number;
-  type: MediaType;
-  title: { romaji: string };
-  bannerImage: string;
-  coverImage: { extraLarge: string };
-}
+import { IMediaBanner } from "../../types";
 
 interface Props extends RouteComponentProps<any> {
   query: DocumentNode;

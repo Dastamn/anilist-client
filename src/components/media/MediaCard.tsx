@@ -10,23 +10,11 @@ interface Props extends RouteComponentProps<any> {
   size?: MediaCardSize;
 }
 
-const Media = (props: Props) => {
+export default withRouter<Props, any>((props: Props) => {
   const {
-    data: {
-      id,
-      type,
-      title,
-      coverImage,
-      bannerImage,
-      format,
-      genres,
-      averageScore,
-      source,
-      comment
-    },
+    data: { id, type, title, coverImage, format, genres, averageScore, source },
     size,
-    history,
-    open
+    history
   } = props;
   const genreString = genres.reduce(
     (acc, curr) => (acc ? acc + ", " + curr : curr),
@@ -67,6 +55,4 @@ const Media = (props: Props) => {
       </div>
     </div>
   );
-};
-
-export default withRouter<Props, any>(Media);
+});

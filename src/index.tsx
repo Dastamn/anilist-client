@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import Wrapper from "./HOC/Wrapper";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
+const client = new ApolloClient({
+  uri: "https://graphql.anilist.co"
+});
 
 ReactDOM.render(
-  <Wrapper>
+  <ApolloProvider client={client}>
     <App />
-  </Wrapper>,
+  </ApolloProvider>,
   document.getElementById("root")
 );

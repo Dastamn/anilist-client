@@ -86,7 +86,7 @@ export default () => {
       <section>
         <h1 className="title">Anime</h1>
       </section>
-      <section>
+      <section style={{ marginBottom: 0 }}>
         <List>
           {bannerListData.map((media, index) => (
             <MediaBanner

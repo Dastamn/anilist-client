@@ -1,5 +1,5 @@
 import React from "react";
-import { IMediaCard, MediaCardSize } from "../../types";
+import { IMediaCard } from "../../types";
 import "../../styles/media.scss";
 import MediaCard from "./MediaCard";
 import Loading from "../Loading";

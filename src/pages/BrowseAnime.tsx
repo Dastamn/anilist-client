@@ -4,14 +4,10 @@ import List from "../components/List";
 import MediaGroupList from "../components/media/MediaGroupList";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
-import {
-  getSortedMediaByStatus,
-  getMediaList,
-  getSortedMedia
-} from "../api/queries";
+import { getMediaList, getMediaByType } from "../apollo/queries/remote";
 import { ApolloCurrentQueryResult } from "apollo-boost";
 import { PaginatedMedia } from "../types";
-import { genres, tags, selectRandom, getSeason } from "../util";
+import { genres, selectRandom, getSeason } from "../util";
 import "../styles/browse.scss";
 
 export default () => {
@@ -29,36 +25,30 @@ export default () => {
 
   const bannerListData = [
     {
-      query: getSortedMedia(
+      query: getMediaByType(
         "ANIME",
         "FAVOURITES_DESC",
-        undefined,
-        undefined,
+        "RELEASING",
         season,
         year
       ),
       comment: "Favourite this season"
     },
     ...state.genres.map(genre => ({
-      query: getSortedMediaByStatus("ANIME", "SCORE_DESC", "RELEASING", [
-        genre
-      ]),
-      comment: `Best ${genre}`
-    })),
-    ...tags.map(tag => ({
-      query: getSortedMediaByStatus(
+      query: getMediaByType(
         "ANIME",
         "SCORE_DESC",
         "RELEASING",
         undefined,
-        [tag]
+        undefined,
+        [genre]
       ),
-      comment: `Best ${tag}`
+      comment: `Best ${genre}`
     }))
   ];
 
   const trending: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
-    getMediaList(1, 10, "ANIME", "TRENDING_DESC")
+    getMediaList(1, 20, "ANIME", "TRENDING_DESC")
   );
   const topRanked: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
     getMediaList(1, 20, "ANIME", "SCORE_DESC")

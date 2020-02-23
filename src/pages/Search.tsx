@@ -1,5 +1,6 @@
 import React from "react";
+import "../styles/browse.scss";
 
 export default () => {
-  return <div>Coming soon!</div>;
+  return <div className="browse">Coming soon!</div>;
 };

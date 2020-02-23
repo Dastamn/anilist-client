@@ -232,7 +232,7 @@ $img-width: 185px;
   }
 }
 
-.media-details {
+.media-data {
   background-color: $lighter-bg-color;
   padding: 12px;
   font-size: 15px;
@@ -246,7 +246,7 @@ $img-width: 185px;
     white-space: nowrap;
   }
 
-  &.elem {
+  .elem {
     @include flex(column);
     padding: 0;
     margin: 7px;

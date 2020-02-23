@@ -11,11 +11,11 @@ export default ({ data }: Props) => {
     {}
   );
   return (
-    <div className="media-details">
+    <div className="media-data">
       {Object.keys(filtereddata).map(
         key =>
           data[key] && (
-            <div key={key} className="media-details elem">
+            <div key={key} className="elem">
               <span style={{ fontWeight: "bold" }}>{key}</span>
               <span>{data[key]}</span>
             </div>

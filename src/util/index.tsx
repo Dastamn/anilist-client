@@ -2,33 +2,20 @@ import React from "react";
 import moment from "moment";
 
 export const genres = [
-  // "Comedy",
-  // "Fantasy",
-  // "Ecchi",
-  // "Romance",
-  // "Sports",
-  // "Psychological",
-  // "Supernatural",
-
-  "Action",
   "Adventure",
   "Comedy",
-  "Drama",
   "Ecchi",
   "Fantasy",
-  // "Hentai",
   "Horror",
   "Mahou Shoujo",
   "Mecha",
   "Music",
-  "Mystery",
   "Psychological",
   "Romance",
   "Sci-Fi",
   "Slice of Life",
   "Sports",
-  "Supernatural",
-  "Thriller"
+  "Supernatural"
 ];
 
 export const tags = ["Seinen", "Shounen", "Shoujo", "Harem", "Isekai"];

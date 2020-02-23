@@ -26,6 +26,7 @@ export default ({ data, group, title }: Props) => {
             <div key={index} className="media-group">
               {chunk.map((media, i) => (
                 <div
+                  key={media.id}
                   style={
                     i === chunk.length - 1
                       ? { margin: "5px 12px 0 0" }

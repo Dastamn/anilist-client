@@ -16,37 +16,38 @@ const Navbar = (props: RouteComponentProps) => {
     history
   } = props;
   const redirect = (location: string) => history.push(location);
+  const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <div className="navbar-content">
       <section onClick={() => redirect("/anime")}>
         {pathname.startsWith("/anime") ? (
-          <MonitorFilled fill="white" />
+          <MonitorFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Monitor fill="gray" />
+          <Monitor fill="gray" onClick={() => redirect("/anime")} />
         )}
       </section>
 
       <section onClick={() => redirect("/manga")}>
         {pathname.startsWith("/manga") ? (
-          <BookFilled fill="white" />
+          <BookFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Book fill="gray" />
+          <Book fill="gray" onClick={() => redirect("/anime")} />
         )}
       </section>
 
       <section onClick={() => redirect("/search")}>
         {pathname.startsWith("/search") ? (
-          <SearchFilled fill="white" />
+          <SearchFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Search fill="gray" />
+          <Search fill="gray" onClick={() => redirect("/anime")} />
         )}
       </section>
 
       <section id="user" onClick={() => redirect("/user")}>
         {pathname.startsWith("/user") ? (
-          <UserFilled fill="white" />
+          <UserFilled fill="white" onClick={scrollUp} />
         ) : (
-          <User fill="gray" />
+          <User fill="gray" onClick={() => redirect("/anime")} />
         )}
       </section>
     </div>

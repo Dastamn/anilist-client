@@ -2,9 +2,7 @@ import React from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { DocumentNode } from "graphql";
-import { ApolloCurrentQueryResult } from "apollo-boost";
 import "../../styles/media.scss";
-import { IMediaBanner } from "../../types";
 
 interface Props extends RouteComponentProps<any> {
   query: DocumentNode;
@@ -12,10 +10,7 @@ interface Props extends RouteComponentProps<any> {
 }
 
 export default withRouter<Props, any>(({ query, comment, history }: Props) => {
-  const res: ApolloCurrentQueryResult<{ Media: IMediaBanner }> = useQuery(
-    query
-  );
-  const { data, loading } = res;
+  const { data, loading } = useQuery(query);
   if (!loading && data) {
     const { Media } = data;
     return (

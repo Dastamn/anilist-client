@@ -1,3 +1,11 @@
+export interface ApolloCache {
+  featured: {
+    __typename: "Featured";
+    anime: IBanner[];
+    manga: IBanner[];
+  };
+}
+
 export type Season = "WINTER" | "SPRING" | "SUMMER" | "FALL";
 export type MediaSort =
   | "SCORE_DESC"
@@ -85,6 +93,16 @@ export interface SortedMedia {
   coverImage: {
     extraLarge: string;
   };
+}
+
+export interface IBanner {
+  id: number;
+  title: string;
+  bannerImage: string | undefined | null;
+  coverImage: string;
+  type: MediaType;
+  categories: string[];
+  comment?: string;
 }
 
 export interface IMediaBanner {

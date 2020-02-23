@@ -4,10 +4,10 @@ import List from "../components/List";
 import MediaGroupList from "../components/media/MediaGroupList";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
-import { getSortedMediaByStatus, getMediaList } from "../api/queries";
+import { getMediaByType, getMediaList } from "../apollo/queries/remote";
 import { ApolloCurrentQueryResult } from "apollo-boost";
 import { PaginatedMedia } from "../types";
-import { genres, tags, selectRandom } from "../util";
+import { genres, selectRandom } from "../util";
 import "../styles/browse.scss";
 
 export default () => {
@@ -21,29 +21,24 @@ export default () => {
 
   const bannerListData = [
     {
-      query: getSortedMediaByStatus("MANGA", "FAVOURITES_DESC", "RELEASING"),
+      query: getMediaByType("MANGA", "FAVOURITES_DESC", "RELEASING"),
       comment: "Current Favourite"
     },
     ...state.genres.map(genre => ({
-      query: getSortedMediaByStatus("MANGA", "SCORE_DESC", "RELEASING", [
-        genre
-      ]),
-      comment: `Best ${genre}`
-    })),
-    ...tags.map(tag => ({
-      query: getSortedMediaByStatus(
+      query: getMediaByType(
         "MANGA",
         "SCORE_DESC",
         "RELEASING",
         undefined,
-        [tag]
+        undefined,
+        [genre]
       ),
-      comment: `Best ${tag}`
+      comment: `Best ${genre}`
     }))
   ];
 
   const trending: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
-    getMediaList(1, 10, "MANGA", "TRENDING_DESC")
+    getMediaList(1, 20, "MANGA", "TRENDING_DESC")
   );
   const topRanked: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
     getMediaList(1, 20, "MANGA", "SCORE_DESC")

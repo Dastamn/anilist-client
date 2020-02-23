@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { getMediaById } from "../api/queries";
+import { getMediaById } from "../apollo/queries/remote";
 import lookup from "country-code-lookup";
 import Loading from "../components/Loading";
 import { IMedia, RelationType, ShortMedia, MediaType } from "../types";
@@ -11,7 +11,6 @@ import MediaData from "../components/media/MediaData";
 import MediaRank from "../components/media/MediaRank";
 import Genres from "../components/Genres";
 import Tabs from "../components/Tabs";
-import CharacterList from "../components/CharacterList";
 import StatusDistribution from "../components/StatusDistribution";
 import List from "../components/List";
 import MediaCard from "../components/media/MediaCard";
@@ -31,6 +30,7 @@ export default withRouter<Props, any>((props: Props) => {
   } = props;
 
   const { loading, data, error } = useQuery(getMediaById(id, type));
+
   useEffect(() => {
     const banner = document.getElementById("banner");
     if (banner) {
@@ -51,7 +51,6 @@ export default withRouter<Props, any>((props: Props) => {
     );
   }
   const media: IMedia = data.Media;
-  console.log(media);
 
   const rating =
     media.rankings.find(({ type, allTime }) => type === "RATED" && allTime) ||
@@ -104,8 +103,6 @@ export default withRouter<Props, any>((props: Props) => {
     Source: prettyString(media.source),
     Country: lookup.byIso(media.countryOfOrigin).country
   };
-
-  console.log(details);
 
   return (
     <div>
@@ -165,8 +162,9 @@ export default withRouter<Props, any>((props: Props) => {
                     {characters.length > 0 && (
                       <section>
                         <List title="Characters">
-                          {characters.map(({ id, role, node }) => (
+                          {characters.map(({ id, role, node }, index) => (
                             <CharacterCard
+                              key={index}
                               data={{
                                 id,
                                 name: node.name.full,

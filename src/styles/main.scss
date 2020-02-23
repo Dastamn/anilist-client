@@ -40,7 +40,7 @@ body {
   color: white;
   height: 100vh;
   width: $navbar-width;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 3;
 

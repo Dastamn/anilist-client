@@ -1,5 +1,5 @@
 import { gql } from "apollo-boost";
-import { MediaType, MediaSort, Season, MediaStatus } from "../../types";
+import { MediaType, MediaSort, Season, MediaStatus } from "../../../types";
 
 export const GENRES = gql`
   query {
@@ -7,59 +7,18 @@ export const GENRES = gql`
   }
 `;
 
-export const getSortedMediaByStatus = (
+export const getMediaByType = (
   type: MediaType,
-  sort: MediaSort,
+  sort?: MediaSort,
   status?: MediaStatus,
+  season?: Season,
+  seasonYear?: number,
   genres?: string[],
   tags?: string[]
 ) => gql`
 query {
-  Media(type: ${type}, sort: ${sort}${
-  genres
-    ? `, genre_in: [${genres.reduce(
-        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
-        ""
-      )}]`
-    : ""
-}${
-  tags
-    ? `, tag_in: [${tags.reduce(
-        (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),
-        ""
-      )}]`
-    : ""
-}
-        ${status ? `, status_in: ${status}` : ""}) {
-    id
-    type
-    format
-    averageScore
-    genres
-    source
-    bannerImage
-    title {
-      romaji
-    }
-    coverImage {
-      medium
-      large
-      extraLarge
-    }
-  }
-}
-`;
-
-export const getSortedMedia = (
-  type: MediaType,
-  sort: MediaSort,
-  genres?: string[],
-  tags?: string[],
-  season?: Season,
-  seasonYear?: number
-) => gql`
-query {
-  Media(type: ${type}, sort: ${sort}${
+  Media(type: ${type}${sort ? `, sort: ${sort}` : ""}
+  ${status ? `, status: ${status}` : ""}${
   genres
     ? `, genre_in: [${genres.reduce(
         (acc, curr) => (acc ? acc + `", ${curr}"` : `"${curr}"`),

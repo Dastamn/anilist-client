@@ -15,6 +15,7 @@ import StatusDistribution from "../components/StatusDistribution";
 import List from "../components/List";
 import MediaCard from "../components/media/MediaCard";
 import "../styles/anime.scss";
+import "../styles/browse.scss";
 import CharacterCard from "../components/CharacterCard";
 
 interface Props extends RouteComponentProps<any> {
@@ -105,7 +106,7 @@ export default withRouter<Props, any>((props: Props) => {
   };
 
   return (
-    <div>
+    <div className="browse" style={{ padding: 0 }}>
       <div
         id="banner"
         style={{

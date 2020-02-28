@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/navbar.scss";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { ReactComponent as Monitor } from "../assets/monitor.svg";
 import { ReactComponent as MonitorFilled } from "../assets/monitor_filled.svg";
@@ -9,6 +8,7 @@ import { ReactComponent as Search } from "../assets/search.svg";
 import { ReactComponent as SearchFilled } from "../assets/search_filled.svg";
 import { ReactComponent as User } from "../assets/user.svg";
 import { ReactComponent as UserFilled } from "../assets/user_filled.svg";
+import "../styles/navbar.scss";
 
 const Navbar = (props: RouteComponentProps) => {
   const {

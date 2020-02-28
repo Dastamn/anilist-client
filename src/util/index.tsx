@@ -97,8 +97,8 @@ export const formatDate = ({
   year
     ? month
       ? day
-        ? moment(new Date(year, month, day)).format("LL")
-        : moment(new Date(year, month)).format("LL")
+        ? moment(new Date(year, month - 1, day)).format("LL")
+        : moment(new Date(year, month - 1)).format("LL")
       : year.toString()
     : null;
 

@@ -15,7 +15,7 @@ export default withRouter<Props, any>(({ query, comment, history }: Props) => {
     const { Media } = data;
     return (
       <div
-        className="banner-media"
+        className="media-banner"
         onClick={() => history.push(`/${Media.type.toLowerCase()}/${Media.id}`)}
       >
         <div className="title">

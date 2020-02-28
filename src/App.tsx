@@ -1,16 +1,16 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import "./styles/main.scss";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-import Media from "./pages/Media";
+import Navbar from "./components/Navbar";
 import Search from "./pages/Search";
 import BrowseAnime from "./pages/BrowseAnime";
 import BrowseManga from "./pages/BrowseManga";
+import MediaDetails from "./pages/MediaPage";
+import "./styles/main.scss";
 
 const App = () => {
   return (
@@ -26,12 +26,12 @@ const App = () => {
             <Route
               exact
               path="/anime/:id"
-              render={props => <Media {...props} type="ANIME" />}
+              render={props => <MediaDetails {...props} type="ANIME" />}
             />
             <Route
               exact
               path="/manga/:id"
-              render={props => <Media {...props} type="MANGA" />}
+              render={props => <MediaDetails {...props} type="MANGA" />}
             />
             <Route exact path="/search" component={Search} />
             <Redirect exact from="*" to="/anime" />

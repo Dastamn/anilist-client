@@ -1,8 +1,8 @@
-import React from "react";
-import "../../styles/media.scss";
+import React, { ReactNode } from "react";
+import "../../styles/mediaData.scss";
 
 interface Props {
-  data: { [key: string]: string | number | JSX.Element | null };
+  data: { [key: string]: string | number | ReactNode | null };
 }
 
 export default ({ data }: Props) => {

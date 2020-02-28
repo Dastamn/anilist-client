@@ -1,0 +1,21 @@
+@import "./config";
+
+.genre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: $lighter-bg-color;
+  border-radius: 17px;
+  font-weight: bold;
+  margin: 5px;
+  padding: 10px 15px;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+  user-select: none;
+  text-decoration: none;
+
+  &:hover {
+    background-color: lighten($color: $lighter-bg-color, $amount: 10);
+  }
+}

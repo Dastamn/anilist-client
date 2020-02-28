@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import List from "../components/List";
-import MediaGroupList from "../components/media/MediaGroupList";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
+import ListView from "../components/ListView";
+import GroupedListView from "../components/GroupedListView";
 import { getMediaByType, getMediaList } from "../apollo/queries/remote";
-import { ApolloCurrentQueryResult } from "apollo-boost";
-import { PaginatedMedia } from "../types";
+import { ShortMedia } from "../types";
 import { genres, selectRandom } from "../util";
 import "../styles/browse.scss";
 
@@ -37,59 +36,89 @@ export default () => {
     }))
   ];
 
-  const trending: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
-    getMediaList(1, 20, "MANGA", "TRENDING_DESC")
-  );
-  const topRanked: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
-    getMediaList(1, 20, "MANGA", "SCORE_DESC")
-  );
-  const popular: ApolloCurrentQueryResult<PaginatedMedia> = useQuery(
-    getMediaList(1, 20, "MANGA", "POPULARITY_DESC")
-  );
+  const trending = useQuery(getMediaList(1, 20, "MANGA", "TRENDING_DESC"));
+  const topRanked = useQuery(getMediaList(1, 20, "MANGA", "SCORE_DESC"));
+  const popular = useQuery(getMediaList(1, 20, "MANGA", "POPULARITY_DESC"));
+
+  if (trending.error) {
+    trending.startPolling(1500);
+  }
+  if (topRanked.error) {
+    topRanked.startPolling(1500);
+  }
+  if (popular.error) {
+    popular.startPolling(1500);
+  }
+
+  if (trending.data && !trending.loading) {
+    trending.stopPolling();
+  }
+  if (topRanked.data && !topRanked.loading) {
+    topRanked.stopPolling();
+  }
+  if (popular.data && !popular.loading) {
+    popular.stopPolling();
+  }
 
   return (
     <div className="browse">
-      <section>
-        <h1 className="title">Manga</h1>
-      </section>
-      <section style={{ marginBottom: 0 }}>
-        <List>
-          {bannerListData.map((media, index) => (
-            <MediaBanner
-              key={index}
-              query={media.query}
-              comment={media.comment}
-            />
-          ))}
-        </List>
-      </section>
-      <section>
-        <List title="Trending">
-          {trending.data
-            ? trending.data.Page.media.map((media, index) => (
+      <h1 className="title">Manga</h1>
+      <ListView>
+        {bannerListData.map((media, index) => (
+          <MediaBanner
+            key={index}
+            query={media.query}
+            comment={media.comment}
+          />
+        ))}
+      </ListView>
+      <ListView title="Trending">
+        {trending.data
+          ? trending.data.Page.media.map((media: ShortMedia, index: number) => (
+              <MediaCard
+                key={index}
+                data={{
+                  id: media.id,
+                  type: media.type,
+                  title: media.title.romaji,
+                  coverImage: media.coverImage.large,
+                  format: media.format,
+                  genres: media.genres,
+                  source: media.source,
+                  averageScore: media.averageScore
+                }}
+              />
+            ))
+          : []}
+      </ListView>
+      <GroupedListView title="Top Ranked">
+        {topRanked.data
+          ? topRanked.data.Page.media.map(
+              (media: ShortMedia, index: number) => (
                 <MediaCard
                   key={index}
                   data={{
                     id: media.id,
                     type: media.type,
                     title: media.title.romaji,
-                    coverImage: media.coverImage.large,
+                    coverImage: media.coverImage.medium,
                     format: media.format,
                     genres: media.genres,
                     source: media.source,
                     averageScore: media.averageScore
                   }}
+                  size="SMALL"
                 />
-              ))
-            : undefined}
-        </List>
-      </section>
-      <section>
-        <MediaGroupList
-          title="Top Ranked"
-          data={
-            topRanked.data
-              ? topRanked.data.Page.media.map(media => ({
+              )
+            )
+          : []}
+      </GroupedListView>
+      <GroupedListView title="Most Popular" style={{ marginBottom: 0 }}>
+        {popular.data
+          ? popular.data.Page.media.map((media: ShortMedia, index: number) => (
+              <MediaCard
+                key={index}
+                data={{
                   id: media.id,
                   type: media.type,
                   title: media.title.romaji,
@@ -98,30 +127,12 @@ export default () => {
                   genres: media.genres,
                   source: media.source,
                   averageScore: media.averageScore
-                }))
-              : undefined
-          }
-        />
-      </section>
-      <section style={{ marginBottom: 0 }}>
-        <MediaGroupList
-          title="Most Popular"
-          data={
-            popular.data
-              ? popular.data.Page.media.map(media => ({
-                  id: media.id,
-                  type: media.type,
-                  title: media.title.romaji,
-                  coverImage: media.coverImage.medium,
-                  format: media.format,
-                  genres: media.genres,
-                  source: media.source,
-                  averageScore: media.averageScore
-                }))
-              : undefined
-          }
-        />
-      </section>
+                }}
+                size="SMALL"
+              />
+            ))
+          : []}
+      </GroupedListView>
     </div>
   );
 };

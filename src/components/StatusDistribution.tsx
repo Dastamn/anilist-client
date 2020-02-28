@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import "../styles/status.scss";
 import { prettyString } from "../util";
 import { DistributionStatus, MediaType } from "../types";
@@ -9,9 +9,10 @@ interface Props {
     amount: number;
   }[];
   type: MediaType;
+  style?: CSSProperties;
 }
 
-export default ({ data, type }: Props) => {
+export default ({ data, type, style }: Props) => {
   const getColor = (status: DistributionStatus) => {
     switch (status) {
       case "CURRENT":
@@ -38,15 +39,17 @@ export default ({ data, type }: Props) => {
     percentages.push(Math.round((amount * 100) / total));
   });
   return (
-    <div>
-      <h1>Status Distribution</h1>
+    <div style={{ marginBottom: "30px", ...style }}>
+      <h1 style={{ marginBottom: "15px", fontSize: "28px" }}>
+        Status Distribution
+      </h1>
       <div className="status-container">
         <div className="status-list">
           {data.map(({ status, amount }, index) => (
             <div key={status} className="status">
               <span
                 id="status-name"
-                key={index}
+                key={"name" + status + index}
                 style={{ backgroundColor: colors[index] }}
               >
                 {status === "CURRENT"
@@ -57,7 +60,7 @@ export default ({ data, type }: Props) => {
               </span>
               <span
                 id="status-value"
-                key={amount}
+                key={"value" + status + index}
                 style={{ color: colors[index] }}
               >
                 {`${percentages[index]}%`}

@@ -1,0 +1,135 @@
+@import "./config";
+
+.media-page {
+  .page-info {
+    @include flex(row);
+    margin: 0 50px;
+  }
+
+  .page-data {
+    position: relative;
+    top: -100px;
+    width: 230px;
+
+    img {
+      height: 345px;
+      width: 230px;
+      border-radius: 5px;
+    }
+  }
+
+  .content {
+    position: relative;
+    top: -50px;
+    width: calc(100% - #{$navbar-width} - 230px);
+    margin-left: 50px;
+
+    @media (max-width: $breakpoint) {
+      width: 100%;
+      top: 0;
+      margin: 0;
+      padding: 0 15px;
+    }
+
+    .description {
+      margin-bottom: 30px;
+
+      .more {
+        cursor: pointer;
+        display: inline-block;
+        color: $primary-color;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .banner {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: inset 0px -810px 30px -750px $dark-bg-color;
+    // box-shadow: inset 0 0 150px 0px $dark-bg-color;
+
+    @media (max-width: $breakpoint) {
+      background-size: cover;
+      height: 450px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      position: absolute;
+      bottom: 0;
+      padding: 150px 15px 25px 15px;
+      box-shadow: inset 0 -150px 70px -60px $dark-bg-color;
+      width: 100%;
+
+      @media (max-width: $breakpoint) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  .score-rank {
+    @include flex(column);
+    margin-bottom: 25px;
+    user-select: none;
+
+    @media (max-width: $breakpoint) {
+      @include flex(row);
+    }
+
+    .score {
+      @include flex(column);
+      padding: 5px 0;
+      margin-right: 13px;
+
+      span {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 50px;
+        margin-bottom: 5px;
+
+        @media (max-width: $breakpoint) {
+          font-size: 36px;
+          line-height: 38px;
+          margin: 0;
+        }
+      }
+    }
+
+    .rank-container {
+      @include flex(column);
+      justify-content: space-around;
+    }
+
+    .rank {
+      @include flex(row);
+      align-items: center;
+      background-color: $lighter-bg-color;
+      border-radius: 5px;
+      padding: 7px 10px;
+      margin: 3px 0;
+      transition: all 0.5s ease;
+      text-decoration: none;
+
+      span {
+        @include max-lines(1);
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      img {
+        height: 14px;
+        width: 14px;
+        margin-right: 5px;
+      }
+
+      &:hover {
+        background-color: lighten($color: $lighter-bg-color, $amount: 10);
+      }
+    }
+  }
+}

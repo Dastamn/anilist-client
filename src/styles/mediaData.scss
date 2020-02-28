@@ -1,0 +1,41 @@
+@import "./config";
+
+.media-data {
+  background-color: $lighter-bg-color;
+  padding: 7px 12px;
+  font-size: 15px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  overflow-x: auto;
+  width: 100%;
+
+  @media (max-width: $breakpoint) {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  @media (max-width: 414px) {
+    display: inline-block;
+  }
+
+  .elem {
+    @include flex(column);
+    padding: 0;
+    margin: 10px;
+    text-transform: capitalize;
+
+    a {
+      text-decoration: none;
+      transition: color 0.5s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    @media (max-width: $breakpoint) {
+      min-width: fit-content;
+      padding-right: 20px;
+    }
+  }
+}

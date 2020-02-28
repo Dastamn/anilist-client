@@ -28,9 +28,11 @@ body {
 .main {
   background-color: $dark-bg-color;
   width: $display-width;
+  margin-left: $navbar-width;
 
   @media (max-width: $breakpoint) {
     width: 100vw;
+    margin-left: 0;
     margin-bottom: $navbar-width;
   }
 }

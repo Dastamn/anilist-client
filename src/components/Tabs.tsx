@@ -6,10 +6,10 @@ interface Props {
 }
 
 export default ({ data }: Props) => {
+  console.log(data);
+
   const keys = Object.entries(data)
-    .filter(
-      entry => entry[1].props.children.type || entry[1].props.children.length
-    )
+    .filter(entry => entry[1])
     .map(entry => entry[0]);
   if (keys.length === 0) {
     return null;

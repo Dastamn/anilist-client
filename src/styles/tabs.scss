@@ -7,7 +7,7 @@
 .tab-header {
   @include flex(row);
 
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 17px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -23,7 +23,7 @@
     width: 100%;
     white-space: nowrap;
     text-align: center;
-    padding: 10px 15px;
+    padding: 10px 20px;
     transition: all 0.5s ease;
     color: gray;
 
@@ -35,12 +35,11 @@
   #active {
     background-color: $lighter-bg-color;
     color: white;
-    padding: 10px 15px;
   }
 }
 
 .tab-pane {
   width: 100%;
-  padding: 20px 0;
+  padding-top: 20px;
   overflow: hidden;
 }

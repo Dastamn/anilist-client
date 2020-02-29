@@ -22,13 +22,17 @@ interface Props {
 }
 
 export default ({ type }: Props) => {
-  const [width, setWidth] = useState(window.innerWidth);
-  const updateWidth = () => setWidth(window.innerWidth);
-  const isMobile = width <= 768;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const updateState = () =>
+    setIsMobile(window.innerWidth <= 768 || window.orientation === 0);
 
   useEffect(() => {
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
+    window.addEventListener("resize", updateState);
+    window.addEventListener("orientationchange", updateState);
+    return () => {
+      window.removeEventListener("resize", updateState);
+      window.removeEventListener("orientationchange", updateState);
+    };
   }, []);
 
   const { id } = useParams();
@@ -106,7 +110,7 @@ export default ({ type }: Props) => {
         id="banner"
         className="banner"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url(${media.coverImage.extraLarge})`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%), url(${media.coverImage.extraLarge})`
         }}
       >
         <h1>{media.title.romaji}</h1>
@@ -188,7 +192,7 @@ export default ({ type }: Props) => {
         id="banner"
         className="banner"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), url(${media.bannerImage})`
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%), url(${media.bannerImage})`
         }}
       />
       <div className="page-info">

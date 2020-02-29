@@ -110,7 +110,7 @@ export default ({ type }: Props) => {
         id="banner"
         className="banner"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%), url(${media.coverImage.extraLarge})`
+          backgroundImage: `url(${media.coverImage.extraLarge})`
         }}
       >
         <h1>{media.title.romaji}</h1>
@@ -192,7 +192,7 @@ export default ({ type }: Props) => {
         id="banner"
         className="banner"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%), url(${media.bannerImage})`
+          backgroundImage: `url(${media.bannerImage})`
         }}
       />
       <div className="page-info">

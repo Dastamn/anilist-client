@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IMediaCard, MediaCardSize } from "../../types";
 import { prettyString, styleScore } from "../../util";
 import "../../styles/media.scss";
@@ -15,13 +15,12 @@ export default (props: Props) => {
     data: { id, type, title, coverImage, format, genres, averageScore, source },
     size
   } = props;
-  const location = useLocation();
   const genreString = genres.reduce(
     (acc, curr) => (acc ? acc + ", " + curr : curr),
     ""
   );
   return size === "SMALL" ? (
-    <Link className="small-media" to={`${location.pathname}/${id}`}>
+    <Link className="small-media" to={`/${type.toLowerCase()}/${id}`}>
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="text">
         <span className="header">
@@ -35,7 +34,7 @@ export default (props: Props) => {
       </div>
     </Link>
   ) : (
-    <Link className="media" to={`${location.pathname}/${id}`}>
+    <Link className="media" to={`/${type.toLowerCase()}/${id}`}>
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="info">
         <div className="text">

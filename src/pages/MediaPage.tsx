@@ -257,6 +257,10 @@ export default ({ type }: Props) => {
               )
             }}
           />
+          <StatusDistribution
+            type={media.type}
+            data={media.stats.statusDistribution}
+          />
           <ListView title="You might also like">
             {media.recommendations.nodes
               .filter(node => node.mediaRecommendation != null)

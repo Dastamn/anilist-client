@@ -6,8 +6,6 @@ interface Props {
 }
 
 export default ({ data }: Props) => {
-  console.log(data);
-
   const keys = Object.entries(data)
     .filter(entry => entry[1])
     .map(entry => entry[0]);

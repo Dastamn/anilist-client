@@ -191,9 +191,13 @@ export default ({ type }: Props) => {
       <div
         id="banner"
         className="banner"
-        style={{
-          backgroundImage: `url(${media.bannerImage})`
-        }}
+        style={
+          media.bannerImage
+            ? {
+                backgroundImage: `url(${media.bannerImage})`
+              }
+            : {}
+        }
       />
       <div className="page-info">
         <div className="page-data">

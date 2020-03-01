@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
+import { GET_GENRES } from "../apollo/queries/local";
 import GroupedListView from "../components/GroupedListView";
 import ListView from "../components/ListView";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
 import { getMediaList, getMediaByType } from "../apollo/queries/remote";
 import { ShortMedia } from "../types";
-import { genres, selectRandom, getSeason } from "../util";
+import { getSeason, nextSeason } from "../util";
 import "../styles/browse.scss";
 
 export default () => {
@@ -14,13 +15,7 @@ export default () => {
   const year = date.getFullYear();
   const season = getSeason(date);
 
-  const [state, setState] = useState({
-    genres: [] as string[]
-  });
-
-  useEffect(() => {
-    setState({ genres: selectRandom(genres, 5) });
-  }, []);
+  const { data } = useQuery(GET_GENRES);
 
   const bannerListData = [
     {
@@ -33,7 +28,7 @@ export default () => {
       ),
       comment: "Favourite this season"
     },
-    ...state.genres.map(genre => ({
+    ...data.genres.map((genre: string) => ({
       query: getMediaByType(
         "ANIME",
         "SCORE_DESC",
@@ -54,14 +49,7 @@ export default () => {
     getMediaList(1, 50, "ANIME", undefined, season, year)
   );
   const upcoming = useQuery(
-    getMediaList(
-      1,
-      50,
-      "ANIME",
-      undefined,
-      getSeason(new Date(date.setMonth(date.getMonth() + 1))),
-      year
-    )
+    getMediaList(1, 50, "ANIME", undefined, nextSeason(season), year)
   );
 
   if (trending.error) {

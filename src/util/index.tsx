@@ -1,5 +1,8 @@
 import React from "react";
 import moment from "moment";
+import { Season } from "../types";
+
+const seasons: Season[] = ["WINTER", "SPRING", "SUMMER", "FALL"];
 
 export const genres = [
   "Adventure",
@@ -64,8 +67,13 @@ export const getSeason = (date: Date) => {
     case 10:
     case 11:
       return "FALL";
+    default:
+      return "WINTER";
   }
 };
+
+export const nextSeason = (season: Season) =>
+  seasons[seasons.indexOf(season) + 1] || seasons[0];
 
 export const styleScore = (score: number | null, fontSize?: number) => {
   if (score) {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import star from "../../assets/star.svg";
 import heart from "../../assets/heart.svg";
 import { Ranking } from "../../types";
@@ -20,7 +21,7 @@ export default ({ score, rankings }: Props) => (
       )}
       <div className="rank-container">
         {rankings.map((ranking, index) => (
-          <a className="rank" key={index} href="/anime">
+          <Link className="rank" key={index} to="/anime">
             <img
               alt={ranking.type}
               src={ranking.type === "RATED" ? star : heart}
@@ -35,7 +36,7 @@ export default ({ score, rankings }: Props) => (
                     ` ${ranking.year}`
               }`}
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

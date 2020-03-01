@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import "../styles/tabs.scss";
 
 interface Props {
-  data: { [key: string]: JSX.Element };
+  data: { [key: string]: ReactNode };
 }
 
 export default ({ data }: Props) => {

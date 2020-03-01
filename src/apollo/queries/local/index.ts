@@ -1,5 +1,11 @@
 import { gql } from "apollo-boost";
 
+export const GET_GENRES = gql`
+  query {
+    genres @client
+  }
+`;
+
 export const GET_FEATURED_ANIME = gql`
   query {
     featured @client {

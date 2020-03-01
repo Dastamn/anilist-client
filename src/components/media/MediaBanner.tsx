@@ -1,23 +1,21 @@
 import React from "react";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { DocumentNode } from "graphql";
 import "../../styles/media.scss";
 
-interface Props extends RouteComponentProps<any> {
+interface Props {
   query: DocumentNode;
   comment: string;
 }
 
-export default withRouter<Props, any>(({ query, comment, history }: Props) => {
+export default ({ query, comment }: Props) => {
+  const location = useLocation();
   const { data, loading } = useQuery(query);
   if (!loading && data) {
     const { Media } = data;
     return (
-      <div
-        className="media-banner"
-        onClick={() => history.push(`/${Media.type.toLowerCase()}/${Media.id}`)}
-      >
+      <Link className="media-banner" to={`${location.pathname}/${Media.id}`}>
         <div className="title">
           <h1>{Media.title.romaji}</h1>
           <h2>{comment}</h2>
@@ -32,8 +30,8 @@ export default withRouter<Props, any>(({ query, comment, history }: Props) => {
             })`
           }}
         />
-      </div>
+      </Link>
     );
   }
   return null;
-});
+};

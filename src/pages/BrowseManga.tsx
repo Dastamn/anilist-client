@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
+import { GET_GENRES } from "../apollo/queries/local";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
 import ListView from "../components/ListView";
 import GroupedListView from "../components/GroupedListView";
 import { getMediaByType, getMediaList } from "../apollo/queries/remote";
 import { ShortMedia } from "../types";
-import { genres, selectRandom } from "../util";
 import "../styles/browse.scss";
 
 export default () => {
-  const [state, setState] = useState({
-    genres: [] as string[]
-  });
-
-  useEffect(() => {
-    setState({ genres: selectRandom(genres, 5) });
-  }, []);
+  const { data } = useQuery(GET_GENRES);
 
   const bannerListData = [
     {
       query: getMediaByType("MANGA", "FAVOURITES_DESC", "RELEASING"),
       comment: "Current Favourite"
     },
-    ...state.genres.map(genre => ({
+    ...data.genres.map((genre: string) => ({
       query: getMediaByType(
         "MANGA",
         "SCORE_DESC",

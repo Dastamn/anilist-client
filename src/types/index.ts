@@ -254,6 +254,6 @@ export interface IMedia {
       summary: string;
       score: number;
       rating: number | null;
-    };
+    }[];
   };
 }

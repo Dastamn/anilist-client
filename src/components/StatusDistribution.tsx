@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
-import "../styles/status.scss";
 import { prettyString } from "../util";
 import { DistributionStatus, MediaType } from "../types";
+import "../styles/status.scss";
 
 interface Props {
   data: {

@@ -1,6 +1,7 @@
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-boost";
+import { genres, selectRandom } from "../util";
 
 const link = new HttpLink({ uri: "https://graphql.anilist.co" });
 
@@ -11,3 +12,9 @@ export const client = new ApolloClient({
   cache,
   resolvers: {}
 });
+
+const data = {
+  genres: selectRandom(genres, 5)
+};
+
+client.writeData({ data });

@@ -131,10 +131,10 @@ export default ({ type }: Props) => {
         <Tabs
           data={{
             Details: <MediaData data={mediaData} />,
-            Characters: (
+            Characters: media.characters.edges.length && (
               <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
             ),
-            Related: (
+            Related: media.relations.edges.length && (
               <div>
                 {Object.entries(relations).map((entry, index) => (
                   <ListView title={prettyString(entry[0])} key={index}>
@@ -157,7 +157,9 @@ export default ({ type }: Props) => {
                 ))}
               </div>
             ),
-            Reviews: <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
+            Reviews: media.reviews.nodes.length && (
+              <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
+            )
           }}
         />
         <StatusDistribution
@@ -224,10 +226,10 @@ export default ({ type }: Props) => {
           </ListView>
           <Tabs
             data={{
-              Characters: (
+              Characters: media.characters.edges.length && (
                 <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
               ),
-              Related: (
+              Related: media.relations.edges.length && (
                 <div>
                   {Object.entries(relations).map((entry, index) => (
                     <ListView title={prettyString(entry[0])} key={index}>
@@ -250,7 +252,9 @@ export default ({ type }: Props) => {
                   ))}
                 </div>
               ),
-              Reviews: <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
+              Reviews: media.reviews.nodes.length && (
+                <div style={{ paddingBottom: "20px" }}>Coming soon!</div>
+              )
             }}
           />
           <ListView title="You might also like">

@@ -1,30 +1,27 @@
 import React from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IMediaCard, MediaCardSize } from "../../types";
 import { prettyString, styleScore } from "../../util";
 import "../../styles/media.scss";
 
-interface Props extends RouteComponentProps<any> {
+interface Props {
   data: IMediaCard;
   open?: boolean;
   size?: MediaCardSize;
 }
 
-export default withRouter<Props, any>((props: Props) => {
+export default (props: Props) => {
   const {
     data: { id, type, title, coverImage, format, genres, averageScore, source },
-    size,
-    history
+    size
   } = props;
+  const location = useLocation();
   const genreString = genres.reduce(
     (acc, curr) => (acc ? acc + ", " + curr : curr),
     ""
   );
   return size === "SMALL" ? (
-    <div
-      className="small-media"
-      onClick={() => history.push(`/${type.toLowerCase()}/${id}`)}
-    >
+    <Link className="small-media" to={`${location.pathname}/${id}`}>
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="text">
         <span className="header">
@@ -36,12 +33,9 @@ export default withRouter<Props, any>((props: Props) => {
         {genres && <span>{genreString}</span>}
         {styleScore(averageScore)}
       </div>
-    </div>
+    </Link>
   ) : (
-    <div
-      className="media"
-      onClick={() => history.push(`/${type.toLowerCase()}/${id}`)}
-    >
+    <Link className="media" to={`${location.pathname}/${id}`}>
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="info">
         <div className="text">
@@ -53,6 +47,6 @@ export default withRouter<Props, any>((props: Props) => {
           {styleScore(averageScore)}
         </div>
       </div>
-    </div>
+    </Link>
   );
-});
+};

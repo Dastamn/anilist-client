@@ -81,27 +81,27 @@ export default ({ type }: Props) => {
   }, {});
 
   const mediaData = {
-    Status: prettyString(media.status),
-    Airing: media.nextAiringEpisode
+    status: prettyString(media.status),
+    airing: media.nextAiringEpisode
       ? `Ep. ${media.nextAiringEpisode.episode}: ${secondsToTime(
           media.nextAiringEpisode.timeUntilAiring,
           true
         )}`
       : null,
-    "Start Date": formatDate(media.startDate),
-    "End Date": isEqual(media.startDate, media.endDate)
+    "start date": formatDate(media.startDate),
+    "end date": isEqual(media.startDate, media.endDate)
       ? null
       : formatDate(media.endDate),
-    English: media.title.english,
-    Native: media.title.native,
-    Chapters: media.chapters,
-    Volumes: media.volumes,
-    Episodes: media.episodes,
-    "Episode Duration": media.duration,
-    Studios: studios.length > 0 ? <span>{studios}</span> : null,
-    Format: prettyString(media.format),
-    Source: prettyString(media.source),
-    Country: lookup.byIso(media.countryOfOrigin).country
+    english: media.title.english,
+    native: media.title.native,
+    chapters: media.chapters,
+    volumes: media.volumes,
+    episodes: media.episodes,
+    "episode duration": media.duration,
+    studios: studios.length > 0 ? <span>{studios}</span> : null,
+    format: prettyString(media.format),
+    source: prettyString(media.source),
+    country: lookup.byIso(media.countryOfOrigin).country
   };
 
   return isMobile ? (

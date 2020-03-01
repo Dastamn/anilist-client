@@ -110,7 +110,8 @@ export default ({ type }: Props) => {
         id="banner"
         className="banner"
         style={{
-          backgroundImage: `url(${media.coverImage.extraLarge})`
+          backgroundImage: `url(${media.coverImage.extraLarge})`,
+          height: "70vh"
         }}
       >
         <h1>{media.title.romaji}</h1>

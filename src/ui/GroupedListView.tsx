@@ -37,7 +37,6 @@ export default ({ children, group, title, style }: Props) => {
             </div>
           ))}
         </div>
-        )}
       </div>
     ) : null;
   }

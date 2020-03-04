@@ -81,10 +81,7 @@ export default ({ type }: Props) => {
   }, {});
 
   const mediaData = {
-    status:
-      type === "ANIME" && media.status === "RELEASING"
-        ? null
-        : prettyString(media.status),
+    status: prettyString(media.status),
     airing: media.nextAiringEpisode
       ? `Ep. ${media.nextAiringEpisode.episode}: ${secondsToTime(
           media.nextAiringEpisode.timeUntilAiring,

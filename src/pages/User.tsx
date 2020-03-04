@@ -38,7 +38,6 @@ export default () => {
 
   if (data) {
     const viewer: Viewer = data.Viewer;
-    console.log(viewer);
     return (
       <div className="profile">
         <div

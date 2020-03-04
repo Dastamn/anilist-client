@@ -18,6 +18,12 @@
     display: inline-block;
   }
 
+  #airing {
+    span {
+      color: lighten($color: $primary-color, $amount: 10);
+    }
+  }
+
   .elem {
     @include flex(column);
     padding: 0;

@@ -81,7 +81,10 @@ export default ({ type }: Props) => {
   }, {});
 
   const mediaData = {
-    status: prettyString(media.status),
+    status:
+      type === "ANIME" && media.status === "RELEASING"
+        ? null
+        : prettyString(media.status),
     airing: media.nextAiringEpisode
       ? `Ep. ${media.nextAiringEpisode.episode}: ${secondsToTime(
           media.nextAiringEpisode.timeUntilAiring,
@@ -169,23 +172,25 @@ export default ({ type }: Props) => {
         />
         <ListView title="You might also like">
           {media.recommendations.nodes
-            .filter(node => node.mediaRecommendation != null)
-            .map(node => node.mediaRecommendation)
-            .map((recommendation, index) => (
-              <MediaCard
-                key={index}
-                data={{
-                  id: recommendation.id,
-                  title: recommendation.title.romaji,
-                  type: recommendation.type,
-                  format: recommendation.format,
-                  coverImage: recommendation.coverImage.large,
-                  genres: recommendation.genres,
-                  averageScore: recommendation.averageScore,
-                  source: media.source
-                }}
-              />
-            ))}
+            ? media.recommendations.nodes
+                .filter(node => node.mediaRecommendation != null)
+                .map(node => node.mediaRecommendation)
+                .map((recommendation, index) => (
+                  <MediaCard
+                    key={index}
+                    data={{
+                      id: recommendation.id,
+                      title: recommendation.title.romaji,
+                      type: recommendation.type,
+                      format: recommendation.format,
+                      coverImage: recommendation.coverImage.large,
+                      genres: recommendation.genres,
+                      averageScore: recommendation.averageScore,
+                      source: media.source
+                    }}
+                  />
+                ))
+            : undefined}
         </ListView>
       </div>
     </div>
@@ -264,23 +269,25 @@ export default ({ type }: Props) => {
           />
           <ListView title="You might also like">
             {media.recommendations.nodes
-              .filter(node => node.mediaRecommendation != null)
-              .map(node => node.mediaRecommendation)
-              .map((recommendation, index) => (
-                <MediaCard
-                  key={index}
-                  data={{
-                    id: recommendation.id,
-                    title: recommendation.title.romaji,
-                    type: recommendation.type,
-                    format: recommendation.format,
-                    coverImage: recommendation.coverImage.large,
-                    genres: recommendation.genres,
-                    averageScore: recommendation.averageScore,
-                    source: media.source
-                  }}
-                />
-              ))}
+              ? media.recommendations.nodes
+                  .filter(node => node.mediaRecommendation != null)
+                  .map(node => node.mediaRecommendation)
+                  .map((recommendation, index) => (
+                    <MediaCard
+                      key={index}
+                      data={{
+                        id: recommendation.id,
+                        title: recommendation.title.romaji,
+                        type: recommendation.type,
+                        format: recommendation.format,
+                        coverImage: recommendation.coverImage.large,
+                        genres: recommendation.genres,
+                        averageScore: recommendation.averageScore,
+                        source: media.source
+                      }}
+                    />
+                  ))
+              : undefined}
           </ListView>
         </div>
       </div>

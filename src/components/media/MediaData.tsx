@@ -15,7 +15,7 @@ export default ({ data }: Props) => {
       {Object.keys(filtereddata).map(
         key =>
           data[key] && (
-            <div key={key} className="elem">
+            <div key={key} className="elem" id={key}>
               <span style={{ fontWeight: "bold" }}>{key}</span>
               <span>{data[key]}</span>
             </div>

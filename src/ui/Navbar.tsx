@@ -15,7 +15,7 @@ export default () => {
   const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <div className="navbar-content">
-      <Link to="anime">
+      <Link to="/anime">
         {pathname.startsWith("/anime") ? (
           <MonitorFilled fill="white" onClick={scrollUp} />
         ) : (

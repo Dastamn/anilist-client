@@ -83,7 +83,7 @@ export default () => {
                 }}
               />
             ))
-          : undefined}
+          : []}
       </ListView>
       <GroupedListView title="Top Ranked">
         {topRanked.data
@@ -105,7 +105,7 @@ export default () => {
                 />
               )
             )
-          : undefined}
+          : []}
       </GroupedListView>
       <GroupedListView title="Most Popular" style={{ marginBottom: 0 }}>
         {popular.data
@@ -125,7 +125,7 @@ export default () => {
                 size="SMALL"
               />
             ))
-          : undefined}
+          : []}
       </GroupedListView>
     </div>
   );

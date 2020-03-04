@@ -104,6 +104,8 @@ export default ({ type }: Props) => {
     country: lookup.byIso(media.countryOfOrigin).country
   };
 
+  console.log(media);
+
   return isMobile ? (
     <div className="media-page">
       <div
@@ -168,7 +170,7 @@ export default ({ type }: Props) => {
           data={media.stats.statusDistribution}
         />
         <ListView title="You might also like">
-          {media.recommendations.nodes
+          {media.recommendations.nodes.length
             ? media.recommendations.nodes
                 .filter(node => node.mediaRecommendation != null)
                 .map(node => node.mediaRecommendation)
@@ -265,7 +267,7 @@ export default ({ type }: Props) => {
             data={media.stats.statusDistribution}
           />
           <ListView title="You might also like">
-            {media.recommendations.nodes
+            {media.recommendations.nodes.length
               ? media.recommendations.nodes
                   .filter(node => node.mediaRecommendation != null)
                   .map(node => node.mediaRecommendation)

@@ -1,0 +1,98 @@
+@import "./config";
+
+.no-auth {
+  @include flex(column);
+  height: 85vh;
+  margin: 50px;
+  text-align: left;
+
+  p {
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+
+    @media (max-width: $breakpoint) {
+      font-size: 2.2em;
+    }
+  }
+
+  @media (max-width: $breakpoint) {
+    margin: 50px 15px;
+  }
+}
+
+.primary-btn {
+  font-size: 18px;
+  padding: 10px 17px;
+  border-radius: 10px;
+  background-color: $primary-color;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  border: none;
+  width: fit-content;
+  user-select: none;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: lighten($color: $primary-color, $amount: 10);
+  }
+}
+
+.profile {
+  .banner {
+    position: relative;
+    height: 330px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @media (max-width: $breakpoint) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-name {
+      @include flex(row);
+      position: absolute;
+      align-items: center;
+      margin: 0 50px;
+      bottom: 20px;
+      height: 200px;
+
+      @media (max-width: $breakpoint) {
+        flex-direction: column;
+        position: relative;
+        bottom: auto;
+        justify-content: center;
+      }
+
+      img {
+        height: 100%;
+        border-radius: 150px;
+        margin-right: 50px;
+
+        @media (max-width: $breakpoint) {
+          margin: 0;
+          height: 100px;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  margin: 0 50px;
+
+  @media (max-width: $breakpoint) {
+    margin: 0 15px;
+  }
+}

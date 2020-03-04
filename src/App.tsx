@@ -5,12 +5,14 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./ui/Navbar";
 import Search from "./pages/Search";
 import BrowseAnime from "./pages/BrowseAnime";
 import BrowseManga from "./pages/BrowseManga";
 import MediaDetails from "./pages/MediaPage";
 import "./styles/main.scss";
+import User from "./pages/User";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -34,6 +36,8 @@ const App = () => {
               render={props => <MediaDetails {...props} type="MANGA" />}
             />
             <Route exact path="/search" component={Search} />
+            <Route exact path="/user/" component={User} />
+            <Route exact path="/login/" component={Login} />
             <Redirect exact from="*" to="/anime" />
           </Switch>
         </div>

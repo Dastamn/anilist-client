@@ -11,6 +11,7 @@ import "../styles/loading.scss";
 
 interface Props {
   error?: ApolloError;
+  message?: string;
   style?: CSSProperties;
 }
 
@@ -23,18 +24,21 @@ const array = [
   narutoFoxAttack
 ];
 
-export default ({ error, style }: Props) => {
+export default ({ error, style, message }: Props) => {
   const image = array[Math.floor(Math.random() * array.length)];
+  const errorMessage =
+    message ||
+    (error
+      ? error.networkError
+        ? "Please check your internet connection..."
+        : "Somehting happened, I'm trying again..."
+      : "");
   return (
     <div className="loading" style={style}>
-      {error ? (
+      {errorMessage ? (
         <div className="loading error">
           <img alt="ERROR" src={sakura} />
-          <span>
-            {error.networkError
-              ? "Please check your internet connection..."
-              : "Somehting happened, I'm trying again..."}
-          </span>
+          <span>{errorMessage}</span>
         </div>
       ) : (
         <img src={image} alt="Loading..." />

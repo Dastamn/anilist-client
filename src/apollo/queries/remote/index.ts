@@ -1,7 +1,22 @@
 import { gql } from "apollo-boost";
 import { MediaType, MediaSort, Season, MediaStatus } from "../../../types";
 
-export const GENRES = gql`
+export const GET_VIEWER = gql`
+  query {
+    Viewer {
+      id
+      name
+      about(asHtml: true)
+      bannerImage
+      siteUrl
+      avatar {
+        large
+      }
+    }
+  }
+`;
+
+export const GET_GENRES = gql`
   query {
     GenreCollection
   }

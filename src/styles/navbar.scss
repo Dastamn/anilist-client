@@ -5,7 +5,7 @@ $size: 25px;
 .navbar-content {
   @include flex(column);
 
-  section {
+  a {
     margin: 20px auto;
   }
 
@@ -37,7 +37,7 @@ $size: 25px;
       height: 20px;
     }
 
-    section {
+    a {
       margin: 12px auto;
     }
   }

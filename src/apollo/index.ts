@@ -1,14 +1,28 @@
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-boost";
+import { HttpLink, ApolloLink, concat } from "apollo-boost";
 import { genres, selectRandom } from "../util";
 
-const link = new HttpLink({ uri: "https://graphql.anilist.co" });
+const httpLink = new HttpLink({
+  uri: "https://graphql.anilist.co"
+});
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token = localStorage.getItem("kensoku_access");
+  if (token) {
+    operation.setContext({
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+  return forward(operation);
+});
 
 export const cache = new InMemoryCache();
 
 export const client = new ApolloClient({
-  link,
+  link: concat(authMiddleware, httpLink),
   cache,
   resolvers: {}
 });

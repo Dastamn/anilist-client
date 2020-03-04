@@ -52,7 +52,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: inset 0px -810px 30px -750px $dark-bg-color;
-    // box-shadow: inset 0 0 150px 0px $dark-bg-color;
 
     @media (max-width: $breakpoint) {
       background-size: cover;
@@ -85,7 +84,7 @@
     .score {
       @include flex(column);
       padding: 5px 0;
-      margin-right: 13px;
+      margin-right: 15px;
 
       span {
         font-size: 48px;

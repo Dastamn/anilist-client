@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ReactComponent as Monitor } from "../assets/monitor.svg";
 import { ReactComponent as MonitorFilled } from "../assets/monitor_filled.svg";
 import { ReactComponent as Book } from "../assets/book.svg";
@@ -10,48 +10,42 @@ import { ReactComponent as User } from "../assets/user.svg";
 import { ReactComponent as UserFilled } from "../assets/user_filled.svg";
 import "../styles/navbar.scss";
 
-const Navbar = (props: RouteComponentProps) => {
-  const {
-    location: { pathname },
-    history
-  } = props;
-  const redirect = (location: string) => history.push(location);
+export default () => {
+  const { pathname } = useLocation();
   const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <div className="navbar-content">
-      <section onClick={() => redirect("/anime")}>
+      <Link to="anime">
         {pathname.startsWith("/anime") ? (
           <MonitorFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Monitor fill="gray" onClick={() => redirect("/anime")} />
+          <Monitor fill="gray" />
         )}
-      </section>
+      </Link>
 
-      <section onClick={() => redirect("/manga")}>
+      <Link to="/manga">
         {pathname.startsWith("/manga") ? (
           <BookFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Book fill="gray" onClick={() => redirect("/anime")} />
+          <Book fill="gray" />
         )}
-      </section>
+      </Link>
 
-      <section onClick={() => redirect("/search")}>
+      <Link to="/search">
         {pathname.startsWith("/search") ? (
           <SearchFilled fill="white" onClick={scrollUp} />
         ) : (
-          <Search fill="gray" onClick={() => redirect("/anime")} />
+          <Search fill="gray" />
         )}
-      </section>
+      </Link>
 
-      <section id="user" onClick={() => redirect("/user")}>
+      <Link id="user" to="/user">
         {pathname.startsWith("/user") ? (
           <UserFilled fill="white" onClick={scrollUp} />
         ) : (
-          <User fill="gray" onClick={() => redirect("/anime")} />
+          <User fill="gray" />
         )}
-      </section>
+      </Link>
     </div>
   );
 };
-
-export default withRouter<RouteComponentProps, any>(Navbar);

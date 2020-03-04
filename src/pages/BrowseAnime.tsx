@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_GENRES } from "../apollo/queries/local";
-import GroupedListView from "../components/GroupedListView";
-import ListView from "../components/ListView";
+import GroupedListView from "../ui/GroupedListView";
+import ListView from "../ui/ListView";
 import MediaCard from "../components/media/MediaCard";
 import MediaBanner from "../components/media/MediaBanner";
 import { getMediaList, getMediaByType } from "../apollo/queries/remote";
@@ -53,6 +53,8 @@ export default () => {
   );
 
   if (trending.error) {
+    console.log(trending.error);
+
     trending.startPolling(1500);
   }
   if (topRanked.error) {

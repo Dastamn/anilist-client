@@ -1,5 +1,5 @@
 import React, { ReactNode, CSSProperties } from "react";
-import Loading from "./LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
 import { chunk } from "lodash";
 import "../styles/list.scss";
 
@@ -39,10 +39,10 @@ export default ({ children, group, title, style }: Props) => {
             ))}
           </div>
         ) : (
-          <Loading />
+          <LoadingScreen style={{ height: "297px" }} />
         )}
       </div>
     );
   }
-  return null;
+  return <LoadingScreen style={{ height: "297px" }} />;
 };

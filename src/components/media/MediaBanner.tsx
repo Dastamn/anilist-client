@@ -11,8 +11,9 @@ interface Props {
 
 export default ({ query, comment }: Props) => {
   const location = useLocation();
-  const { data, loading } = useQuery(query);
+  const { data, loading, startPolling, stopPolling } = useQuery(query);
   if (!loading && data) {
+    stopPolling();
     const { Media } = data;
     return (
       <Link className="media-banner" to={`${location.pathname}/${Media.id}`}>
@@ -33,5 +34,6 @@ export default ({ query, comment }: Props) => {
       </Link>
     );
   }
+  startPolling(1500);
   return null;
 };

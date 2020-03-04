@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Link, useParams } from "react-router-dom";
-import Tabs from "../components/Tabs";
+import Tabs from "../ui/Tabs";
 import MediaCard from "../components/media/MediaCard";
 import StatusDistribution from "../components/StatusDistribution";
 import LoadingScreen from "../components/LoadingScreen";
 import MediaData from "../components/media/MediaData";
-import ListView from "../components/ListView";
+import ListView from "../ui/ListView";
 import MediaDescription from "../components/media/MediaDescription";
 import MediaScore from "../components/media/MediaScore";
 import lookup from "country-code-lookup";

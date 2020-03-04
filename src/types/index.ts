@@ -257,3 +257,14 @@ export interface IMedia {
     }[];
   };
 }
+
+export interface Viewer {
+  id: number;
+  name: string;
+  about: string;
+  bannerImage: string;
+  siteUrl: string;
+  avatar: {
+    large: string;
+  };
+}

@@ -17,19 +17,14 @@ export default () => {
       <div className="no-auth">
         <h1>Not Logged In!</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ipsam
-          fugiat iure. Dolores molestiae sunt quo vel commodi, illum consectetur
-          voluptatibus id non possimus dicta a iusto doloremque voluptatem
-          placeat?Nobis nihil labore repudiandae modi tempore. Soluta nemo sit
-          quas a, explicabo rerum earum nisi est non, repudiandae quaerat. Sequi
-          quam molestiae voluptas deleniti molestias commodi repudiandae eaque
-          voluptate error!
+          Login with Anilist to access your anime and manga lists and much more
+          !
         </p>
         <button className="primary-btn">
           <a
             href={`https://anilist.co/api/v2/oauth/authorize?client_id=${process.env.REACT_APP_ID}&response_type=token`}
           >
-            Loggin with Anilist
+            Login with Anilist
           </a>
         </button>
       </div>

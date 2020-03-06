@@ -120,7 +120,6 @@ export interface IMediaCard {
   bannerImage?: string;
   type: MediaType;
   format: MediaFormat;
-  source: MediaSource;
   averageScore: number | null;
   genres: string[];
   comment?: string;

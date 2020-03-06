@@ -87,7 +87,6 @@ export default () => {
                   coverImage: media.coverImage.large,
                   format: media.format,
                   genres: media.genres,
-                  source: media.source,
                   averageScore: media.averageScore
                 }}
               />
@@ -107,7 +106,6 @@ export default () => {
                     coverImage: media.coverImage.medium,
                     format: media.format,
                     genres: media.genres,
-                    source: media.source,
                     averageScore: media.averageScore
                   }}
                   size="SMALL"
@@ -128,7 +126,6 @@ export default () => {
                   coverImage: media.coverImage.medium,
                   format: media.format,
                   genres: media.genres,
-                  source: media.source,
                   averageScore: media.averageScore
                 }}
                 size="SMALL"

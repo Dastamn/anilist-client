@@ -151,8 +151,7 @@ export default ({ type }: Props) => {
                           type: node.type,
                           format: node.format,
                           coverImage: node.coverImage.large,
-                          averageScore: node.averageScore,
-                          source: media.source
+                          averageScore: node.averageScore
                         }}
                       />
                     ))}
@@ -184,8 +183,7 @@ export default ({ type }: Props) => {
                       format: recommendation.format,
                       coverImage: recommendation.coverImage.large,
                       genres: recommendation.genres,
-                      averageScore: recommendation.averageScore,
-                      source: media.source
+                      averageScore: recommendation.averageScore
                     }}
                   />
                 ))
@@ -248,8 +246,7 @@ export default ({ type }: Props) => {
                             type: node.type,
                             format: node.format,
                             coverImage: node.coverImage.large,
-                            averageScore: node.averageScore,
-                            source: media.source
+                            averageScore: node.averageScore
                           }}
                         />
                       ))}
@@ -281,8 +278,7 @@ export default ({ type }: Props) => {
                         format: recommendation.format,
                         coverImage: recommendation.coverImage.large,
                         genres: recommendation.genres,
-                        averageScore: recommendation.averageScore,
-                        source: media.source
+                        averageScore: recommendation.averageScore
                       }}
                     />
                   ))

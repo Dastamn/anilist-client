@@ -12,7 +12,7 @@ interface Props {
 
 export default (props: Props) => {
   const {
-    data: { id, type, title, coverImage, format, genres, averageScore, source },
+    data: { id, type, title, coverImage, format, genres, averageScore },
     size
   } = props;
   const genreString = genres.reduce(
@@ -23,9 +23,7 @@ export default (props: Props) => {
     <Link className="small-media" to={`/${type.toLowerCase()}/${id}`}>
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="text">
-        <span className="header">
-          {prettyString(type === "ANIME" ? format : source)}
-        </span>
+        <span className="header">{prettyString(format)}</span>
         <div style={{ maxHeight: "50px" }}>
           <h1>{title}</h1>
         </div>
@@ -38,9 +36,7 @@ export default (props: Props) => {
       <div className="img" style={{ backgroundImage: `url(${coverImage})` }} />
       <div className="info">
         <div className="text">
-          <span className="header">
-            {prettyString(type === "ANIME" ? format : source)}
-          </span>
+          <span className="header">{prettyString(format)}</span>
           <h1>{title}</h1>
           {genres && <span>{genreString}</span>}
           {styleScore(averageScore)}

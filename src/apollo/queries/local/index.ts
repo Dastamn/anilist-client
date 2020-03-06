@@ -5,3 +5,9 @@ export const GET_GENRES = gql`
     genres @client
   }
 `;
+
+export const GET_FEATURED_MEDIA = gql`
+  query {
+    featuredMedia @client
+  }
+`;

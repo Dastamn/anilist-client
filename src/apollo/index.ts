@@ -28,7 +28,8 @@ export const client = new ApolloClient({
 });
 
 const data = {
-  genres: selectRandom(genres, 5)
+  genres: selectRandom(genres, 8),
+  featuredMedia: [] as number[]
 };
 
 client.writeData({ data });

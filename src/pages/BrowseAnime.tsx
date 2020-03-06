@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_GENRES } from "../apollo/queries/local";
+import { GET_GENRES, GET_FEATURED_MEDIA } from "../apollo/queries/local";
 import GroupedListView from "../ui/GroupedListView";
 import ListView from "../ui/ListView";
 import MediaCard from "../components/media/MediaCard";
@@ -8,6 +8,7 @@ import MediaBanner from "../components/media/MediaBanner";
 import { getMediaList, getMediaByType } from "../apollo/queries/remote";
 import { ShortMedia } from "../types";
 import { getSeason, nextSeason } from "../util";
+import { client } from "../apollo";
 import "../styles/browse.scss";
 
 export default () => {
@@ -15,26 +16,33 @@ export default () => {
   const year = date.getFullYear();
   const season = getSeason(date);
 
-  const { data } = useQuery(GET_GENRES);
+  client.writeQuery({
+    query: GET_FEATURED_MEDIA,
+    data: {
+      featuredMedia: []
+    }
+  });
+  const cache = client.readQuery({ query: GET_GENRES });
 
   const bannerListData = [
     {
       query: getMediaByType(
         "ANIME",
         "FAVOURITES_DESC",
-        "RELEASING",
+        undefined,
         season,
         year
       ),
+      force: true,
       comment: "Favourite this season"
     },
-    ...data.genres.map((genre: string) => ({
+    ...cache.genres.map((genre: string) => ({
       query: getMediaByType(
         "ANIME",
-        "SCORE_DESC",
-        "RELEASING",
+        "POPULARITY_DESC",
         undefined,
-        undefined,
+        season,
+        year,
         [genre]
       ),
       comment: `Best ${genre}`
@@ -90,11 +98,12 @@ export default () => {
     <div className="browse">
       <h1 className="title">Anime</h1>
       <ListView>
-        {bannerListData.map((media, index) => (
+        {bannerListData.map((banner, index) => (
           <MediaBanner
             key={index}
-            query={media.query}
-            comment={media.comment}
+            query={banner.query}
+            comment={banner.comment}
+            force={banner.force}
           />
         ))}
       </ListView>

@@ -9,9 +9,6 @@ export const genres = [
   "Comedy",
   "Ecchi",
   "Fantasy",
-  "Horror",
-  "Mahou Shoujo",
-  "Mecha",
   "Music",
   "Psychological",
   "Romance",
@@ -21,7 +18,7 @@ export const genres = [
   "Supernatural"
 ];
 
-export const tags = ["Seinen", "Shounen", "Shoujo", "Harem", "Isekai"];
+// export const tags = ["Seinen", "Shounen", "Shoujo", "Harem", "Isekai"];
 
 export const secondsToTime = (seconds: number, minimise: boolean) => {
   let d = Math.floor(seconds / (3600 * 24));

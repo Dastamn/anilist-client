@@ -46,7 +46,7 @@ export default ({ type }: Props) => {
     if (banner) {
       const callback = () => {
         let offset = window.pageYOffset;
-        banner.style.backgroundPositionY = `${offset * 0.7}px`;
+        banner.style.backgroundPositionY = `${offset * 0.5}px`;
       };
       window.addEventListener("scroll", callback);
       return () => window.removeEventListener("scroll", callback);
@@ -217,7 +217,10 @@ export default ({ type }: Props) => {
           />
           <MediaData data={mediaData} />
         </div>
-        <div className="content">
+        <div
+          className="content"
+          style={{ position: "relative", top: "-50px", marginLeft: "50px" }}
+        >
           <h1 style={{ marginBottom: "15px" }}>{media.title.romaji}</h1>
           <MediaDescription description={media.description} length={1024} />
           <ListView style={{ padding: 0 }}>

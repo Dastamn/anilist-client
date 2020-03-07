@@ -237,10 +237,12 @@ export interface IMedia {
     }[];
   };
   stats: {
-    statusDistribution: {
-      status: DistributionStatus;
-      amount: number;
-    }[];
+    statusDistribution:
+      | {
+          status: DistributionStatus;
+          amount: number;
+        }[]
+      | null;
   };
   recommendations: {
     nodes: {

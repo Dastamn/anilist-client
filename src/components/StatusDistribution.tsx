@@ -4,15 +4,20 @@ import { DistributionStatus, MediaType } from "../types";
 import "../styles/status.scss";
 
 interface Props {
-  data: {
-    status: DistributionStatus;
-    amount: number;
-  }[];
+  data:
+    | {
+        status: DistributionStatus;
+        amount: number;
+      }[]
+    | null;
   type: MediaType;
   style?: CSSProperties;
 }
 
 export default ({ data, type, style }: Props) => {
+  if (data === null) {
+    return null;
+  }
   const getColor = (status: DistributionStatus) => {
     switch (status) {
       case "CURRENT":
